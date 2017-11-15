@@ -1,5 +1,5 @@
 var Buffer = require('safe-buffer').Buffer
-var base58check = require('bs58check')
+var base58check = require('bs58smartcheck')
 var bcrypto = require('./crypto')
 var createHmac = require('create-hmac')
 var typeforce = require('typeforce')
@@ -140,6 +140,10 @@ HDNode.prototype.getNetwork = function () {
 
 HDNode.prototype.getPublicKeyBuffer = function () {
   return this.keyPair.getPublicKeyBuffer()
+}
+
+HDNode.prototype.toWIF = function () {
+  return this.keyPair.toWIF()
 }
 
 HDNode.prototype.neutered = function () {

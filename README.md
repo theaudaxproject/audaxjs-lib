@@ -1,9 +1,6 @@
-# BitcoinJS (bitcoinjs-lib)
-[![Build Status](https://travis-ci.org/bitcoinjs/bitcoinjs-lib.png?branch=master)](https://travis-ci.org/bitcoinjs/bitcoinjs-lib)
-[![NPM](https://img.shields.io/npm/v/bitcoinjs-lib.svg)](https://www.npmjs.org/package/bitcoinjs-lib)
-[![tip for next commit](https://tip4commit.com/projects/735.svg)](http://tip4commit.com/projects/735)
+# SmartCashJS (smartcashjs-lib)
+[![NPM](https://img.shields.io/npm/v/smartcashjs-lib.svg)](https://www.npmjs.org/package/smartcashjs-lib)
 
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 The pure JavaScript SmartCash library for node.js and browsers.
 
@@ -75,16 +72,6 @@ uglifyjs ... --mangle --reserved 'BigInteger,ECPair,Point'
 **NOTE**: If you expect this library to run on an iOS 10 device, ensure that you are using [buffer@5.0.5](https://github.com/feross/buffer/pull/155) or greater.
 
 
-### Flow
-Definitions for [Flow typechecker](https://flowtype.org/) are available in flow-typed repository.
-
-[You can either download them directly](https://github.com/flowtype/flow-typed/blob/master/definitions/npm/bitcoinjs-lib_v2.x.x/flow_v0.17.x-/bitcoinjs-lib_v2.x.x.js) from the repo, or with the flow-typed CLI
-
-    # npm install -g flow-typed
-    $ flow-typed install -f 0.27 smartcashjs-lib@2.2.0 # 0.27 for flow version, 2.2.0 for bitcoinjs-lib version
-
-The definitions are complete and up to date with version 2.2.0. The definitions are maintained by [@runn1ng](https://github.com/runn1ng).
-
 ## Examples
 The below examples are implemented as integration tests, they should be very easy to understand.
 Otherwise, pull requests are appreciated.
@@ -110,7 +97,6 @@ Some examples interact (via HTTPS) with a 3rd Party Blockchain Provider (3PBP).
 - [Use BIP39 to generate BIP32 addresses](https://github.com/SmartCash/bitcoinjs-lib/blob/master/test/integration/bip32.js#L83)
 - [Create (and broadcast via 3PBP) a Transaction where Alice can redeem the output after the expiry](https://github.com/SmartCash/bitcoinjs-lib/blob/master/test/integration/cltv.js#L37)
 - [Create (and broadcast via 3PBP) a Transaction where Alice and Bob can redeem the output at any time](https://github.com/SmartCash/bitcoinjs-lib/blob/master/test/integration/cltv.js#L71)
-- [Create (but fail to broadcast via 3PBP) a Transaction where Alice attempts to redeem before the expiry](https://github.com/SmartCash/bitcoinjs-lib/blob/master/test/integration/cltv.js#L104)
 - [Recover a private key from duplicate R values](https://github.com/SmartCash/bitcoinjs-lib/blob/master/test/integration/crypto.js#L14)
 - [Recover a BIP32 parent private key from the parent public key, and a derived, non-hardened child private key](https://github.com/SmartCash/bitcoinjs-lib/blob/master/test/integration/crypto.js#L115)
 - [Generate a single-key stealth address](https://github.com/SmartCash/bitcoinjs-lib/blob/master/test/integration/stealth.js#L70:)
@@ -122,38 +108,19 @@ Some examples interact (via HTTPS) with a 3rd Party Blockchain Provider (3PBP).
 If you have a use case that you feel could be listed here, please [ask for it](https://github.com/SmartCash/bitcoinjs-lib/issues/new)!
 
 
-## Contributing
-We are always accepting of pull requests, but we do adhere to specific standards in regards to coding style, test driven development and commit messages.
-
-Please make your best effort to adhere to these when contributing to save on trivial corrections.
-
-
-### Running the test suite
-
-``` bash
-npm test
-npm run-script coverage
-```
-
 ## Complementing Libraries
 - [BIP21](https://github.com/bitcoinjs/bip21) - A BIP21 compatible URL encoding utility library
 - [BIP38](https://github.com/bitcoinjs/bip38) - Passphrase-protected private keys
 - [BIP39](https://github.com/bitcoinjs/bip39) - Mnemonic generation for deterministic keys
-- [BIP32-Utils](https://github.com/bitcoinjs/bip32-utils) - A set of utilities for working with BIP32
+- [BIP32-Utils](https://github.com/SmartCash/bip32-utils) - A set of utilities for working with BIP32
 - [BIP66](https://github.com/bitcoinjs/bip66) - Strict DER signature decoding
 - [BIP69](https://github.com/bitcoinjs/bip69) - Lexicographical Indexing of Transaction Inputs and Outputs
 - [Base58](https://github.com/cryptocoinjs/bs58) - Base58 encoding/decoding
-- [Base58 Check](https://github.com/bitcoinjs/bs58check) - Base58 check encoding/decoding
+- [Base58 Check](https://github.com/SmartCash/bs58check) - Base58 check encoding/decoding
 - [Bech32](https://github.com/bitcoinjs/bech32) - A BIP173 compliant Bech32 encoding library
 - [coinselect](https://github.com/bitcoinjs/coinselect) - A fee-optimizing, transaction input selection module for bitcoinjs-lib.
 - [merkle-lib](https://github.com/bitcoinjs/merkle-lib) - A performance conscious library for merkle root and tree calculations.
 - [minimaldata](https://github.com/bitcoinjs/minimaldata) - A module to check bitcoin policy: SCRIPT_VERIFY_MINIMALDATA
-
-
-## Alternatives
-- [BCoin](https://github.com/indutny/bcoin)
-- [Bitcore](https://github.com/bitpay/bitcore)
-- [Cryptocoin](https://github.com/cryptocoinjs/cryptocoin)
 
 
 ## LICENSE [MIT](LICENSE)

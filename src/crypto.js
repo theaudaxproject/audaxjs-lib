@@ -22,7 +22,7 @@ function hash256 (buffer) {
 }
 
 function keccak256 (buffer) {
-  var tmp = new sha3.update(buffer)
+  let tmp = new sha3.update(buffer)
   return new Buffer(tmp.digest('hex'), 'hex')
 }
 

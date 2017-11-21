@@ -5,6 +5,13 @@ for (var key in templates) {
   script[key] = templates[key]
 }
 
+function amount (amount, fee) {
+  fee = fee || 0.01
+  fee = fee * 100000000
+  amount = amount * 100000000
+  return amount - fee
+}
+
 module.exports = {
   bufferutils: require('./bufferutils'), // TODO: remove in 4.0.0
 
@@ -19,5 +26,6 @@ module.exports = {
   crypto: require('./crypto'),
   networks: require('./networks'),
   opcodes: require('bitcoin-ops'),
-  script: script
+  script: script,
+  amount: amount
 }

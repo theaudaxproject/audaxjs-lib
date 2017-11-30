@@ -6,7 +6,6 @@ for (var key in templates) {
 }
 
 function amount (amount, fee) {
-  fee = fee || 0.01
   fee = fee * 100000000
   amount = amount * 100000000
   return amount - fee

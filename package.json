@@ -1,6 +1,6 @@
 {
   "name": "smartcashjs-lib",
-  "version": "3.3.3",
+  "version": "3.3.4",
   "description": "Client-side SmartCash JavaScript library",
   "main": "./src/index.js",
   "engines": {

@@ -6,8 +6,8 @@ for (var key in templates) {
 }
 
 function amount (amount, fee) {
-  fee = parseFloat(fee, 10) * 100000000
-  amount = parseFloat(amount, 10) * 100000000
+  fee = parseInt(parseFloat(fee) * 100000000, 10)
+  amount = parseInt(parseFloat(amount) * 100000000, 10)
   return amount - fee
 }
 

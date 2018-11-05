@@ -5,14 +5,14 @@ for (var key in templates) {
   script[key] = templates[key]
 }
 
-function amount (amount, fee) {
-  fee = parseInt(parseFloat(fee) * 100000000, 10)
-  amount = parseInt(parseFloat(amount) * 100000000, 10)
+function amount (amount, fee = '0') {
+  fee = parseInt((parseFloat(fee) * 1000000000) / 10, 10)
+  amount = parseInt((parseFloat(amount) * 1000000000) / 10, 10)
   return amount - fee
 }
 
 module.exports = {
-  bufferutils: require('./bufferutils'), // TODO: remove in 4.0.0
+  bufferutils: require('./bufferutils'),
 
   Block: require('./block'),
   ECPair: require('./ecpair'),

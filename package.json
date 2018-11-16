@@ -1,20 +1,20 @@
 {
-  "name": "smartcashjs-lib",
+  "name": "swiftcashjs-lib",
   "version": "3.3.6",
-  "description": "Client-side SmartCash JavaScript library",
+  "description": "Client-side SwiftCash JavaScript library",
   "main": "./src/index.js",
   "engines": {
     "node": ">=4.0.0"
   },
   "keywords": [
-    "smartcashjs",
-    "smartcash",
+    "swiftcashjs",
+    "swiftcash",
     "browserify",
     "javascript"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/SmartCash/bitcoinjs-lib.git"
+    "url": "https://github.com/SwiftCash/bitcoinjs-lib.git"
   },
   "files": [
     "src"

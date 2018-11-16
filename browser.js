@@ -8336,7 +8336,7 @@ require('./convert')
 
 module.exports = BigInteger
 },{"./bigi":35,"./convert":36}],38:[function(require,module,exports){},{}],39:[function(require,module,exports){
-var smartcashjs = require('smartcashjs-lib')
+var swiftcashjs = require('swiftcashjs-lib')
 var discovery = require('./discovery')
 
 var Chain = require('./chain')
@@ -8347,7 +8347,7 @@ function Account (chains) {
 
 Account.fromJSON = function (json, network) {
   var chains = json.map(function (j) {
-    var node = smartcashjs.HDNode.fromBase58(j.node, network)
+    var node = swiftcashjs.HDNode.fromBase58(j.node, network)
 
     var chain = new Chain(node, j.k)
     chain.map = j.map
@@ -8436,7 +8436,7 @@ Account.prototype.toJSON = function () {
 
 module.exports = Account
 
-},{"./chain":40,"./discovery":41,"smartcashjs-lib":"smartcashjs-lib"}],40:[function(require,module,exports){
+},{"./chain":40,"./discovery":41,"swiftcashjs-lib":"swiftcashjs-lib"}],40:[function(require,module,exports){
 function Chain (parent, k) {
   k = k || 0
   this.__parent = parent
@@ -31012,7 +31012,7 @@ module.exports = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"bs58":52,"buffer":4,"js-sha3":66}],"smartcashjs-lib":[function(require,module,exports){
+},{"bs58":52,"buffer":4,"js-sha3":66}],"swiftcashjs-lib":[function(require,module,exports){
 var script = require('./script')
 
 var templates = require('./templates')

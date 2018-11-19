@@ -18,7 +18,7 @@ The pure JavaScript SwiftCash library for node.js and browsers.
 
 ## Should I use this in production?
 If you are thinking of using the master branch of this library in production, **stop**.
-Master is not stable; it is our development branch, and [only tagged releases may be classified as stable](https://github.com/SwiftCash/SwiftCashjs-lib/tags).
+Master is not stable; it is our development branch, and [only tagged releases may be classified as stable](https://github.com/swiftcashproject/swiftcashjs-lib/tags).
 
 
 ## Installation
@@ -77,35 +77,35 @@ The below examples are implemented as integration tests, they should be very eas
 Otherwise, pull requests are appreciated.
 Some examples interact (via HTTPS) with a 3rd Party Blockchain Provider (3PBP).
 
-- [Generate a random address](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/addresses.js#L12)
-- [Generate an address from a SHA256 hash](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/addresses.js#L19)
-- [Import an address via WIF](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/addresses.js#L29)
-- [Generate a 2-of-3 P2SH multisig address](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/addresses.js#L36)
-- [Support the retrieval of transactions for an address (3rd party blockchain)](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/addresses.js#L100)
-- [Generate a Testnet address](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/addresses.js#L121)
-- [Create a 1-to-1 Transaction](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/transactions.js#L14)
-- [Create a 2-to-2 Transaction](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/transactions.js#L28)
-- [Create (and broadcast via 3PBP) a typical Transaction](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/transactions.js#L46)
-- [Create (and broadcast via 3PBP) a Transaction with an OP\_RETURN output](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/transactions.js#L88)
-- [Create (and broadcast via 3PBP) a Transaction with a 2-of-4 P2SH(multisig) input](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/transactions.js#L115)
-- [Import a BIP32 testnet xpriv and export to WIF](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/bip32.js#L8)
-- [Export a BIP32 xpriv, then import it](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/bip32.js#L15)
-- [Export a BIP32 xpub](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/bip32.js#L26)
-- [Create a BIP32, bitcoin, account 0, external address](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/bip32.js#L35)
-- [Create a BIP44, bitcoin, account 0, external address](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/bip32.js#L50)
-- [Create a BIP49, bitcoin testnet, account 0, external address](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/bip32.js#L66)
-- [Use BIP39 to generate BIP32 addresses](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/bip32.js#L83)
-- [Create (and broadcast via 3PBP) a Transaction where Alice can redeem the output after the expiry](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/cltv.js#L37)
-- [Create (and broadcast via 3PBP) a Transaction where Alice and Bob can redeem the output at any time](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/cltv.js#L71)
-- [Recover a private key from duplicate R values](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/crypto.js#L14)
-- [Recover a BIP32 parent private key from the parent public key, and a derived, non-hardened child private key](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/crypto.js#L115)
-- [Generate a single-key stealth address](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/stealth.js#L70:)
-- [Generate a single-key stealth address (randomly)](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/stealth.js#L89:)
-- [Recover parent recipient.d, if a derived private key is leaked (and nonce was revealed)](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/stealth.js#L105)
-- [Generate a dual-key stealth address](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/stealth.js#L122)
-- [Generate a dual-key stealth address (randomly)](https://github.com/SwiftCash/SwiftCashjs-lib/blob/master/test/integration/stealth.js#L145)
+- [Generate a random address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/addresses.js#L12)
+- [Generate an address from a SHA256 hash](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/addresses.js#L19)
+- [Import an address via WIF](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/addresses.js#L29)
+- [Generate a 2-of-3 P2SH multisig address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/addresses.js#L36)
+- [Support the retrieval of transactions for an address (3rd party blockchain)](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/addresses.js#L100)
+- [Generate a Testnet address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/addresses.js#L121)
+- [Create a 1-to-1 Transaction](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/transactions.js#L14)
+- [Create a 2-to-2 Transaction](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/transactions.js#L28)
+- [Create (and broadcast via 3PBP) a typical Transaction](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/transactions.js#L46)
+- [Create (and broadcast via 3PBP) a Transaction with an OP\_RETURN output](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/transactions.js#L88)
+- [Create (and broadcast via 3PBP) a Transaction with a 2-of-4 P2SH(multisig) input](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/transactions.js#L115)
+- [Import a BIP32 testnet xpriv and export to WIF](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L8)
+- [Export a BIP32 xpriv, then import it](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L15)
+- [Export a BIP32 xpub](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L26)
+- [Create a BIP32, bitcoin, account 0, external address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L35)
+- [Create a BIP44, bitcoin, account 0, external address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L50)
+- [Create a BIP49, bitcoin testnet, account 0, external address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L66)
+- [Use BIP39 to generate BIP32 addresses](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L83)
+- [Create (and broadcast via 3PBP) a Transaction where Alice can redeem the output after the expiry](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/cltv.js#L37)
+- [Create (and broadcast via 3PBP) a Transaction where Alice and Bob can redeem the output at any time](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/cltv.js#L71)
+- [Recover a private key from duplicate R values](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/crypto.js#L14)
+- [Recover a BIP32 parent private key from the parent public key, and a derived, non-hardened child private key](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/crypto.js#L115)
+- [Generate a single-key stealth address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/stealth.js#L70:)
+- [Generate a single-key stealth address (randomly)](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/stealth.js#L89:)
+- [Recover parent recipient.d, if a derived private key is leaked (and nonce was revealed)](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/stealth.js#L105)
+- [Generate a dual-key stealth address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/stealth.js#L122)
+- [Generate a dual-key stealth address (randomly)](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/stealth.js#L145)
 
-If you have a use case that you feel could be listed here, please [ask for it](https://github.com/SwiftCash/SwiftCashjs-lib/issues/new)!
+If you have a use case that you feel could be listed here, please [ask for it](https://github.com/swiftcashproject/swiftcashjs-lib/issues/new)!
 
 
 ## Complementing Libraries

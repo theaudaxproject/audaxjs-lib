@@ -112,11 +112,11 @@ If you have a use case that you feel could be listed here, please [ask for it](h
 - [BIP21](https://github.com/bitcoinjs/bip21) - A BIP21 compatible URL encoding utility library
 - [BIP38](https://github.com/bitcoinjs/bip38) - Passphrase-protected private keys
 - [BIP39](https://github.com/bitcoinjs/bip39) - Mnemonic generation for deterministic keys
-- [BIP32-Utils](https://github.com/SwiftCash/bip32-utils) - A set of utilities for working with BIP32
+- [BIP32-Utils](https://github.com/swiftcashproject/bip32-utils) - A set of utilities for working with BIP32
 - [BIP66](https://github.com/bitcoinjs/bip66) - Strict DER signature decoding
 - [BIP69](https://github.com/bitcoinjs/bip69) - Lexicographical Indexing of Transaction Inputs and Outputs
 - [Base58](https://github.com/cryptocoinjs/bs58) - Base58 encoding/decoding
-- [Base58 Check](https://github.com/SwiftCash/bs58check) - Base58 check encoding/decoding
+- [Base58 Check](https://github.com/swiftcashproject/bs58check) - Base58 check encoding/decoding
 - [Bech32](https://github.com/bitcoinjs/bech32) - A BIP173 compliant Bech32 encoding library
 - [coinselect](https://github.com/bitcoinjs/coinselect) - A fee-optimizing, transaction input selection module for bitcoinjs-lib.
 - [merkle-lib](https://github.com/bitcoinjs/merkle-lib) - A performance conscious library for merkle root and tree calculations.

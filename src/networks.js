@@ -1,6 +1,6 @@
 module.exports = {
   bitcoin: {
-    messagePrefix: '\x18SwiftCash Signed Message:\n',
+    messagePrefix: '\x18DarkNet Signed Message:\n',
     bech32: 'bc',
     bip32: {
       public: 0x0488b21e,
@@ -11,7 +11,7 @@ module.exports = {
     wif: 0xbf
   },
   testnet: {
-    messagePrefix: '\x18SwiftCash Signed Message:\n',
+    messagePrefix: '\x18DarkNet Signed Message:\n',
     bech32: 'tb',
     bip32: {
       public: 0x043587cf,

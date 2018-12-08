@@ -26284,7 +26284,7 @@ module.exports = Sha512
 },{"./hash":77,"inherits":65,"safe-buffer":76}],85:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var bech32 = require('bech32')
-var bs58check = require('bs58smartcheck')
+var bs58check = require('bs58swiftcheck')
 var bscript = require('./script')
 var btemplates = require('./templates')
 var networks = require('./networks')
@@ -26380,7 +26380,7 @@ module.exports = {
   toOutputScript: toOutputScript
 }
 
-},{"./networks":93,"./script":94,"./templates":96,"./types":120,"bech32":34,"bs58smartcheck":"bs58smartcheck","safe-buffer":76,"typeforce":123}],86:[function(require,module,exports){
+},{"./networks":93,"./script":94,"./templates":96,"./types":120,"bech32":34,"bs58swiftcheck":"bs58swiftcheck","safe-buffer":76,"typeforce":123}],86:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var bcrypto = require('./crypto')
 var fastMerkleRoot = require('merkle-lib/fastRoot')
@@ -27056,7 +27056,7 @@ module.exports = ECSignature
 }).call(this,require("buffer").Buffer)
 },{"./types":120,"bigi":37,"bip66":49,"buffer":4,"typeforce":123}],92:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
-var base58check = require('bs58smartcheck')
+var base58check = require('bs58swiftcheck')
 var bcrypto = require('./crypto')
 var createHmac = require('create-hmac')
 var typeforce = require('typeforce')
@@ -27376,7 +27376,7 @@ HDNode.prototype.derivePath = function (path) {
 
 module.exports = HDNode
 
-},{"./crypto":88,"./ecpair":90,"./networks":93,"./types":120,"bigi":37,"bs58smartcheck":"bs58smartcheck","create-hmac":57,"ecurve":61,"safe-buffer":76,"typeforce":123}],93:[function(require,module,exports){
+},{"./crypto":88,"./ecpair":90,"./networks":93,"./types":120,"bigi":37,"bs58swiftcheck":"bs58swiftcheck","create-hmac":57,"ecurve":61,"safe-buffer":76,"typeforce":123}],93:[function(require,module,exports){
 module.exports = {
   bitcoin: {
     messagePrefix: '\x18Bitcoin Signed Message:\n',
@@ -30955,7 +30955,7 @@ module.exports = {
   }
 }
 
-},{"./wordlists/chinese_simplified.json":42,"./wordlists/chinese_traditional.json":43,"./wordlists/english.json":44,"./wordlists/french.json":45,"./wordlists/italian.json":46,"./wordlists/japanese.json":47,"./wordlists/spanish.json":48,"create-hash":54,"pbkdf2":68,"randombytes":74,"safe-buffer":76,"unorm":125}],"bs58smartcheck":[function(require,module,exports){
+},{"./wordlists/chinese_simplified.json":42,"./wordlists/chinese_traditional.json":43,"./wordlists/english.json":44,"./wordlists/french.json":45,"./wordlists/italian.json":46,"./wordlists/japanese.json":47,"./wordlists/spanish.json":48,"create-hash":54,"pbkdf2":68,"randombytes":74,"safe-buffer":76,"unorm":125}],"bs58swiftcheck":[function(require,module,exports){
 (function (Buffer){
 'use strict'
 
@@ -31047,7 +31047,7 @@ module.exports = {
 
 },{"./address":85,"./block":86,"./bufferutils":87,"./crypto":88,"./ecpair":90,"./ecsignature":91,"./hdnode":92,"./networks":93,"./script":94,"./templates":96,"./transaction":118,"./transaction_builder":119,"bitcoin-ops":50}],"wif-smart":[function(require,module,exports){
 (function (Buffer){
-var bs58smartcheck = require('bs58smartcheck')
+var bs58swiftcheck = require('bs58swiftcheck')
 
 function decodeRaw (buffer, version) {
   // check version only if defined
@@ -31089,13 +31089,13 @@ function encodeRaw (version, privateKey, compressed) {
 }
 
 function decode (string, version) {
-  return decodeRaw(bs58smartcheck.decode(string), version)
+  return decodeRaw(bs58swiftcheck.decode(string), version)
 }
 
 function encode (version, privateKey, compressed) {
-  if (typeof version === 'number') return bs58smartcheck.encode(encodeRaw(version, privateKey, compressed))
+  if (typeof version === 'number') return bs58swiftcheck.encode(encodeRaw(version, privateKey, compressed))
 
-  return bs58smartcheck.encode(
+  return bs58swiftcheck.encode(
     encodeRaw(
       version.version,
       version.privateKey,
@@ -31112,4 +31112,4 @@ module.exports = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"bs58smartcheck":"bs58smartcheck","buffer":4}]},{},[]);
+},{"bs58swiftcheck":"bs58swiftcheck","buffer":4}]},{},[]);

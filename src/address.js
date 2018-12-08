@@ -1,6 +1,6 @@
 var Buffer = require('safe-buffer').Buffer
 var bech32 = require('bech32')
-var bs58check = require('bs58smartcheck')
+var bs58check = require('bs58swiftcheck')
 var bscript = require('./script')
 var btemplates = require('./templates')
 var networks = require('./networks')

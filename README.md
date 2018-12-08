@@ -91,9 +91,9 @@ Some examples interact (via HTTPS) with a 3rd Party Blockchain Provider (3PBP).
 - [Import a BIP32 testnet xpriv and export to WIF](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L8)
 - [Export a BIP32 xpriv, then import it](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L15)
 - [Export a BIP32 xpub](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L26)
-- [Create a BIP32, bitcoin, account 0, external address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L35)
-- [Create a BIP44, bitcoin, account 0, external address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L50)
-- [Create a BIP49, bitcoin testnet, account 0, external address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L66)
+- [Create a BIP32, swiftcash, account 0, external address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L35)
+- [Create a BIP44, swiftcash, account 0, external address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L50)
+- [Create a BIP49, swiftcash testnet, account 0, external address](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L66)
 - [Use BIP39 to generate BIP32 addresses](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/bip32.js#L83)
 - [Create (and broadcast via 3PBP) a Transaction where Alice can redeem the output after the expiry](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/cltv.js#L37)
 - [Create (and broadcast via 3PBP) a Transaction where Alice and Bob can redeem the output at any time](https://github.com/swiftcashproject/swiftcashjs-lib/blob/master/test/integration/cltv.js#L71)
@@ -118,9 +118,9 @@ If you have a use case that you feel could be listed here, please [ask for it](h
 - [Base58](https://github.com/cryptocoinjs/bs58) - Base58 encoding/decoding
 - [Base58 Check](https://github.com/swiftcashproject/bs58check) - Base58 check encoding/decoding
 - [Bech32](https://github.com/bitcoinjs/bech32) - A BIP173 compliant Bech32 encoding library
-- [coinselect](https://github.com/bitcoinjs/coinselect) - A fee-optimizing, transaction input selection module for bitcoinjs-lib.
+- [coinselect](https://github.com/bitcoinjs/coinselect) - A fee-optimizing, transaction input selection module for swiftcashjs-lib.
 - [merkle-lib](https://github.com/bitcoinjs/merkle-lib) - A performance conscious library for merkle root and tree calculations.
-- [minimaldata](https://github.com/bitcoinjs/minimaldata) - A module to check bitcoin policy: SCRIPT_VERIFY_MINIMALDATA
+- [minimaldata](https://github.com/bitcoinjs/minimaldata) - A module to check swiftcash policy: SCRIPT_VERIFY_MINIMALDATA
 
 
 ## LICENSE [MIT](LICENSE)

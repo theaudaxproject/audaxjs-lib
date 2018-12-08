@@ -6491,7 +6491,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":31,"_process":12,"inherits":30}],33:[function(require,module,exports){
 // base-x encoding
 // Forked from https://github.com/cryptocoinjs/bs58
-// Originally written by Mike Hearn for BitcoinJ
+// Originally written by Mike Hearn for swiftcashJ
 // Copyright (c) 2011 Google Inc
 // Ported to JavaScript by Stefan Thomas
 // Merged Buffer refactorings from base58-native by Stephen Pair
@@ -8511,7 +8511,7 @@ Chain.prototype.pop = function () {
 module.exports = Chain
 
 },{}],41:[function(require,module,exports){
-// https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki#account-discovery
+// https://github.com/swiftcash/bips/blob/master/bip-0044.mediawiki#account-discovery
 module.exports = function discovery (chain, gapLimit, queryCb, done) {
   var gap = 0
   var checked = 0
@@ -22918,7 +22918,7 @@ module.exports=[
 ]
 
 },{}],49:[function(require,module,exports){
-// Reference https://github.com/bitcoin/bips/blob/master/bip-0066.mediawiki
+// Reference https://github.com/swiftcash/bips/blob/master/bip-0066.mediawiki
 // Format: 0x30 [total-length] 0x02 [R-length] [R] 0x02 [S-length] [S]
 // NOTE: SIGHASH byte ignored AND restricted, truncate before use
 
@@ -25054,7 +25054,7 @@ function pbkdf2 (password, salt, iterations, keylen, digest) {
 module.exports = pbkdf2
 
 },{"./default-encoding":70,"./precondition":71,"create-hash/md5":56,"ripemd160":75,"safe-buffer":76,"sha.js":78}],73:[function(require,module,exports){
-var OPS = require('bitcoin-ops')
+var OPS = require('swiftcash-ops')
 
 function encodingLength (i) {
   return i < OPS.OP_PUSHDATA1 ? 1
@@ -25132,7 +25132,7 @@ module.exports = {
   decode: decode
 }
 
-},{"bitcoin-ops":50}],74:[function(require,module,exports){
+},{"swiftcash-ops":50}],74:[function(require,module,exports){
 (function (process,global){
 'use strict'
 
@@ -26333,7 +26333,7 @@ function toBech32 (data, version, prefix) {
 }
 
 function fromOutputScript (outputScript, network) {
-  network = network || networks.bitcoin
+  network = network || networks.swiftcash
 
   if (btemplates.pubKeyHash.output.check(outputScript)) return toBase58Check(bscript.compile(outputScript).slice(3, 23), network.pubKeyHash)
   if (btemplates.scriptHash.output.check(outputScript)) return toBase58Check(bscript.compile(outputScript).slice(2, 22), network.scriptHash)
@@ -26344,7 +26344,7 @@ function fromOutputScript (outputScript, network) {
 }
 
 function toOutputScript (address, network) {
-  network = network || networks.bitcoin
+  network = network || networks.swiftcash
 
   var decode
   try {
@@ -26386,7 +26386,7 @@ var bcrypto = require('./crypto')
 var fastMerkleRoot = require('merkle-lib/fastRoot')
 var typeforce = require('typeforce')
 var types = require('./types')
-var varuint = require('varuint-bitcoin')
+var varuint = require('varuint-swiftcash')
 
 var Transaction = require('./transaction')
 
@@ -26559,9 +26559,9 @@ Block.prototype.checkProofOfWork = function () {
 
 module.exports = Block
 
-},{"./crypto":88,"./transaction":118,"./types":120,"merkle-lib/fastRoot":67,"safe-buffer":76,"typeforce":123,"varuint-bitcoin":126}],87:[function(require,module,exports){
-var pushdata = require('pushdata-bitcoin')
-var varuint = require('varuint-bitcoin')
+},{"./crypto":88,"./transaction":118,"./types":120,"merkle-lib/fastRoot":67,"safe-buffer":76,"typeforce":123,"varuint-swiftcash":126}],87:[function(require,module,exports){
+var pushdata = require('pushdata-swiftcash')
+var varuint = require('varuint-swiftcash')
 
 // https://github.com/feross/buffer/blob/master/index.js#L1127
 function verifuint (value, max) {
@@ -26617,7 +26617,7 @@ module.exports = {
   writeVarInt: writeVarInt
 }
 
-},{"pushdata-bitcoin":73,"varuint-bitcoin":126}],88:[function(require,module,exports){
+},{"pushdata-swiftcash":73,"varuint-swiftcash":126}],88:[function(require,module,exports){
 (function (Buffer){
 var createHash = require('create-hash')
 var sha3 = require('js-sha3').keccak256
@@ -26858,7 +26858,7 @@ function ECPair (d, Q, options) {
   }
 
   this.compressed = options.compressed === undefined ? true : options.compressed
-  this.network = options.network || NETWORKS.bitcoin
+  this.network = options.network || NETWORKS.swiftcash
 }
 
 Object.defineProperty(ECPair.prototype, 'Q', {
@@ -26892,9 +26892,9 @@ ECPair.fromWIF = function (string, network) {
 
     if (!network) throw new Error('Unknown network version')
 
-  // otherwise, assume a network object (or default to bitcoin)
+  // otherwise, assume a network object (or default to swiftcash)
   } else {
-    network = network || NETWORKS.bitcoin
+    network = network || NETWORKS.swiftcash
 
     if (version !== network.wif) throw new Error('Invalid network version')
   }
@@ -27083,7 +27083,7 @@ function HDNode (keyPair, chainCode) {
 
 HDNode.HIGHEST_BIT = 0x80000000
 HDNode.LENGTH = 78
-HDNode.MASTER_SECRET = Buffer.from('Bitcoin seed', 'utf8')
+HDNode.MASTER_SECRET = Buffer.from('swiftcash seed', 'utf8')
 
 HDNode.fromSeedBuffer = function (seed, network) {
   typeforce(types.tuple(types.Buffer, types.maybe(types.Network)), arguments)
@@ -27126,9 +27126,9 @@ HDNode.fromBase58 = function (string, networks) {
 
     if (!network) throw new Error('Unknown network version')
 
-  // otherwise, assume a network object (or default to bitcoin)
+  // otherwise, assume a network object (or default to swiftcash)
   } else {
-    network = networks || NETWORKS.bitcoin
+    network = networks || NETWORKS.swiftcash
   }
 
   if (version !== network.bip32.private &&
@@ -27263,7 +27263,7 @@ HDNode.prototype.toBase58 = function (__isPrivate) {
   return base58check.encode(buffer)
 }
 
-// https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#child-key-derivation-ckd-functions
+// https://github.com/swiftcash/bips/blob/master/bip-0032.mediawiki#child-key-derivation-ckd-functions
 HDNode.prototype.derive = function (index) {
   typeforce(types.UInt32, index)
 
@@ -27378,8 +27378,8 @@ module.exports = HDNode
 
 },{"./crypto":88,"./ecpair":90,"./networks":93,"./types":120,"bigi":37,"bs58swiftcheck":"bs58swiftcheck","create-hmac":57,"ecurve":61,"safe-buffer":76,"typeforce":123}],93:[function(require,module,exports){
 module.exports = {
-  bitcoin: {
-    messagePrefix: '\x18Bitcoin Signed Message:\n',
+  swiftcash: {
+    messagePrefix: '\x18swiftcash Signed Message:\n',
     bech32: 'bc',
     bip32: {
       public: 0x0488b21e,
@@ -27390,7 +27390,7 @@ module.exports = {
     wif: 0xBF
   },
   testnet: {
-    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    messagePrefix: '\x18swiftcash Signed Message:\n',
     bech32: 'tb',
     bip32: {
       public: 0x043587cf,
@@ -27405,13 +27405,13 @@ module.exports = {
 },{}],94:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var bip66 = require('bip66')
-var pushdata = require('pushdata-bitcoin')
+var pushdata = require('pushdata-swiftcash')
 var typeforce = require('typeforce')
 var types = require('./types')
 var scriptNumber = require('./script_number')
 
-var OPS = require('bitcoin-ops')
-var REVERSE_OPS = require('bitcoin-ops/map')
+var OPS = require('swiftcash-ops')
+var REVERSE_OPS = require('swiftcash-ops/map')
 var OP_INT_BASE = OPS.OP_RESERVED // OP_1 - 1
 
 function isOPInt (value) {
@@ -27618,7 +27618,7 @@ module.exports = {
   isDefinedHashType: isDefinedHashType
 }
 
-},{"./script_number":95,"./types":120,"bip66":49,"bitcoin-ops":50,"bitcoin-ops/map":51,"pushdata-bitcoin":73,"safe-buffer":76,"typeforce":123}],95:[function(require,module,exports){
+},{"./script_number":95,"./types":120,"bip66":49,"swiftcash-ops":50,"swiftcash-ops/map":51,"pushdata-swiftcash":73,"safe-buffer":76,"typeforce":123}],95:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 
 function decode (buffer, maxLength, minimal) {
@@ -27777,7 +27777,7 @@ var Buffer = require('safe-buffer').Buffer
 var bscript = require('../../script')
 var p2mso = require('./output')
 var typeforce = require('typeforce')
-var OPS = require('bitcoin-ops')
+var OPS = require('swiftcash-ops')
 
 function partialSignature (value) {
   return value === OPS.OP_0 || bscript.isCanonicalSignature(value)
@@ -27843,13 +27843,13 @@ module.exports = {
   encodeStack: encodeStack
 }
 
-},{"../../script":94,"./output":99,"bitcoin-ops":50,"safe-buffer":76,"typeforce":123}],99:[function(require,module,exports){
+},{"../../script":94,"./output":99,"swiftcash-ops":50,"safe-buffer":76,"typeforce":123}],99:[function(require,module,exports){
 // m [pubKeys ...] n OP_CHECKMULTISIG
 
 var bscript = require('../../script')
 var types = require('../../types')
 var typeforce = require('typeforce')
-var OPS = require('bitcoin-ops')
+var OPS = require('swiftcash-ops')
 var OP_INT_BASE = OPS.OP_RESERVED // OP_1 - 1
 
 function check (script, allowIncomplete) {
@@ -27909,13 +27909,13 @@ module.exports = {
   encode: encode
 }
 
-},{"../../script":94,"../../types":120,"bitcoin-ops":50,"typeforce":123}],100:[function(require,module,exports){
+},{"../../script":94,"../../types":120,"swiftcash-ops":50,"typeforce":123}],100:[function(require,module,exports){
 // OP_RETURN {data}
 
 var bscript = require('../script')
 var types = require('../types')
 var typeforce = require('typeforce')
-var OPS = require('bitcoin-ops')
+var OPS = require('swiftcash-ops')
 
 function check (script) {
   var buffer = bscript.compile(script)
@@ -27945,7 +27945,7 @@ module.exports = {
   }
 }
 
-},{"../script":94,"../types":120,"bitcoin-ops":50,"typeforce":123}],101:[function(require,module,exports){
+},{"../script":94,"../types":120,"swiftcash-ops":50,"typeforce":123}],101:[function(require,module,exports){
 arguments[4][97][0].apply(exports,arguments)
 },{"./input":102,"./output":103,"dup":97}],102:[function(require,module,exports){
 // {signature}
@@ -27993,7 +27993,7 @@ module.exports = {
 
 var bscript = require('../../script')
 var typeforce = require('typeforce')
-var OPS = require('bitcoin-ops')
+var OPS = require('swiftcash-ops')
 
 function check (script) {
   var chunks = bscript.decompile(script)
@@ -28023,7 +28023,7 @@ module.exports = {
   encode: encode
 }
 
-},{"../../script":94,"bitcoin-ops":50,"typeforce":123}],104:[function(require,module,exports){
+},{"../../script":94,"swiftcash-ops":50,"typeforce":123}],104:[function(require,module,exports){
 arguments[4][97][0].apply(exports,arguments)
 },{"./input":105,"./output":106,"dup":97}],105:[function(require,module,exports){
 // {signature} {pubKey}
@@ -28084,7 +28084,7 @@ module.exports = {
 var bscript = require('../../script')
 var types = require('../../types')
 var typeforce = require('typeforce')
-var OPS = require('bitcoin-ops')
+var OPS = require('swiftcash-ops')
 
 function check (script) {
   var buffer = bscript.compile(script)
@@ -28122,7 +28122,7 @@ module.exports = {
   encode: encode
 }
 
-},{"../../script":94,"../../types":120,"bitcoin-ops":50,"typeforce":123}],107:[function(require,module,exports){
+},{"../../script":94,"../../types":120,"swiftcash-ops":50,"typeforce":123}],107:[function(require,module,exports){
 arguments[4][97][0].apply(exports,arguments)
 },{"./input":108,"./output":109,"dup":97}],108:[function(require,module,exports){
 // <scriptSig> {serialized scriptPubKey script}
@@ -28216,7 +28216,7 @@ module.exports = {
 var bscript = require('../../script')
 var types = require('../../types')
 var typeforce = require('typeforce')
-var OPS = require('bitcoin-ops')
+var OPS = require('swiftcash-ops')
 
 function check (script) {
   var buffer = bscript.compile(script)
@@ -28246,7 +28246,7 @@ module.exports = {
   encode: encode
 }
 
-},{"../../script":94,"../../types":120,"bitcoin-ops":50,"typeforce":123}],110:[function(require,module,exports){
+},{"../../script":94,"../../types":120,"swiftcash-ops":50,"typeforce":123}],110:[function(require,module,exports){
 module.exports = {
   output: require('./output')
 }
@@ -28258,7 +28258,7 @@ var Buffer = require('safe-buffer').Buffer
 var bscript = require('../../script')
 var types = require('../../types')
 var typeforce = require('typeforce')
-var OPS = require('bitcoin-ops')
+var OPS = require('swiftcash-ops')
 
 var HEADER = Buffer.from('aa21a9ed', 'hex')
 
@@ -28295,7 +28295,7 @@ module.exports = {
   encode: encode
 }
 
-},{"../../script":94,"../../types":120,"bitcoin-ops":50,"safe-buffer":76,"typeforce":123}],112:[function(require,module,exports){
+},{"../../script":94,"../../types":120,"swiftcash-ops":50,"safe-buffer":76,"typeforce":123}],112:[function(require,module,exports){
 arguments[4][97][0].apply(exports,arguments)
 },{"./input":113,"./output":114,"dup":97}],113:[function(require,module,exports){
 // {signature} {pubKey}
@@ -28349,7 +28349,7 @@ module.exports = {
 var bscript = require('../../script')
 var types = require('../../types')
 var typeforce = require('typeforce')
-var OPS = require('bitcoin-ops')
+var OPS = require('swiftcash-ops')
 
 function check (script) {
   var buffer = bscript.compile(script)
@@ -28378,7 +28378,7 @@ module.exports = {
   encode: encode
 }
 
-},{"../../script":94,"../../types":120,"bitcoin-ops":50,"typeforce":123}],115:[function(require,module,exports){
+},{"../../script":94,"../../types":120,"swiftcash-ops":50,"typeforce":123}],115:[function(require,module,exports){
 arguments[4][97][0].apply(exports,arguments)
 },{"./input":116,"./output":117,"dup":97}],116:[function(require,module,exports){
 (function (Buffer){
@@ -28453,7 +28453,7 @@ module.exports = {
 var bscript = require('../../script')
 var types = require('../../types')
 var typeforce = require('typeforce')
-var OPS = require('bitcoin-ops')
+var OPS = require('swiftcash-ops')
 
 function check (script) {
   var buffer = bscript.compile(script)
@@ -28482,15 +28482,15 @@ module.exports = {
   encode: encode
 }
 
-},{"../../script":94,"../../types":120,"bitcoin-ops":50,"typeforce":123}],118:[function(require,module,exports){
+},{"../../script":94,"../../types":120,"swiftcash-ops":50,"typeforce":123}],118:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var bcrypto = require('./crypto')
 var bscript = require('./script')
 var bufferutils = require('./bufferutils')
-var opcodes = require('bitcoin-ops')
+var opcodes = require('swiftcash-ops')
 var typeforce = require('typeforce')
 var types = require('./types')
-var varuint = require('varuint-bitcoin')
+var varuint = require('varuint-swiftcash')
 
 function varSliceSize (someScript) {
   var length = someScript.length
@@ -28731,7 +28731,7 @@ Transaction.prototype.clone = function () {
 /**
  * Hash transaction for signing a specific input.
  *
- * Bitcoin uses a different hash for each signed transaction input.
+ * swiftcash uses a different hash for each signed transaction input.
  * This method copies the transaction, makes the necessary changes based on the
  * hashType, and then hashes the result.
  * This hash can then be used to sign the provided transaction input.
@@ -28739,7 +28739,7 @@ Transaction.prototype.clone = function () {
 Transaction.prototype.hashForSignature = function (inIndex, prevOutScript, hashType) {
   typeforce(types.tuple(types.UInt32, types.Buffer, /* types.UInt8 */ types.Number), arguments)
 
-  // https://github.com/bitcoin/bitcoin/blob/master/src/test/sighash_tests.cpp#L29
+  // https://github.com/swiftcash/swiftcash/blob/master/src/test/sighash_tests.cpp#L29
   if (inIndex >= this.ins.length) return ONE
 
   // ignore OP_CODESEPARATOR
@@ -28762,7 +28762,7 @@ Transaction.prototype.hashForSignature = function (inIndex, prevOutScript, hashT
 
   // SIGHASH_SINGLE: ignore all outputs, except at the same index?
   } else if ((hashType & 0x1f) === Transaction.SIGHASH_SINGLE) {
-    // https://github.com/bitcoin/bitcoin/blob/master/src/test/sighash_tests.cpp#L60
+    // https://github.com/swiftcash/swiftcash/blob/master/src/test/sighash_tests.cpp#L60
     if (inIndex >= this.outs.length) return ONE
 
     // truncate outputs after
@@ -28976,14 +28976,14 @@ Transaction.prototype.setWitness = function (index, witness) {
 
 module.exports = Transaction
 
-},{"./bufferutils":87,"./crypto":88,"./script":94,"./types":120,"bitcoin-ops":50,"safe-buffer":76,"typeforce":123,"varuint-bitcoin":126}],119:[function(require,module,exports){
+},{"./bufferutils":87,"./crypto":88,"./script":94,"./types":120,"swiftcash-ops":50,"safe-buffer":76,"typeforce":123,"varuint-swiftcash":126}],119:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var baddress = require('./address')
 var bcrypto = require('./crypto')
 var bscript = require('./script')
 var btemplates = require('./templates')
 var networks = require('./networks')
-var ops = require('bitcoin-ops')
+var ops = require('swiftcash-ops')
 var typeforce = require('typeforce')
 var types = require('./types')
 var scriptTypes = btemplates.types
@@ -29445,7 +29445,7 @@ function buildInput (input, allowIncomplete) {
 
 function TransactionBuilder (network, maximumFeeRate) {
   this.prevTxMap = {}
-  this.network = network || networks.bitcoin
+  this.network = network || networks.swiftcash
 
   // WARNING: This is __NOT__ to be relied on, its just another potential safety mechanism (safety in-depth)
   this.maximumFeeRate = maximumFeeRate || 1000
@@ -29755,7 +29755,7 @@ TransactionBuilder.prototype.__overMaximumFees = function (bytes) {
 
 module.exports = TransactionBuilder
 
-},{"./address":85,"./crypto":88,"./ecpair":90,"./ecsignature":91,"./networks":93,"./script":94,"./templates":96,"./transaction":118,"./types":120,"bitcoin-ops":50,"safe-buffer":76,"typeforce":123}],120:[function(require,module,exports){
+},{"./address":85,"./crypto":88,"./ecpair":90,"./ecsignature":91,"./networks":93,"./script":94,"./templates":96,"./transaction":118,"./types":120,"swiftcash-ops":50,"safe-buffer":76,"typeforce":123}],120:[function(require,module,exports){
 var typeforce = require('typeforce')
 
 var UINT31_MAX = Math.pow(2, 31) - 1
@@ -31040,12 +31040,12 @@ module.exports = {
   address: require('./address'),
   crypto: require('./crypto'),
   networks: require('./networks'),
-  opcodes: require('bitcoin-ops'),
+  opcodes: require('swiftcash-ops'),
   script: script,
   amount: amount
 }
 
-},{"./address":85,"./block":86,"./bufferutils":87,"./crypto":88,"./ecpair":90,"./ecsignature":91,"./hdnode":92,"./networks":93,"./script":94,"./templates":96,"./transaction":118,"./transaction_builder":119,"bitcoin-ops":50}],"wif-swift":[function(require,module,exports){
+},{"./address":85,"./block":86,"./bufferutils":87,"./crypto":88,"./ecpair":90,"./ecsignature":91,"./hdnode":92,"./networks":93,"./script":94,"./templates":96,"./transaction":118,"./transaction_builder":119,"swiftcash-ops":50}],"wif-swift":[function(require,module,exports){
 (function (Buffer){
 var bs58swiftcheck = require('bs58swiftcheck')
 

@@ -4,7 +4,7 @@ var bcrypto = require('./crypto')
 var bscript = require('./script')
 var btemplates = require('./templates')
 var networks = require('./networks')
-var ops = require('bitcoin-ops')
+var ops = require('swiftcash-ops')
 var typeforce = require('typeforce')
 var types = require('./types')
 var scriptTypes = btemplates.types
@@ -469,7 +469,7 @@ function buildInput (input, allowIncomplete) {
 
 function TransactionBuilder (network, maximumFeeRate) {
   this.prevTxMap = {}
-  this.network = network || networks.bitcoin
+  this.network = network || networks.swiftcash
 
   // WARNING: This is __NOT__ to be relied on, its just another potential safety mechanism (safety in-depth)
   this.maximumFeeRate = maximumFeeRate || 1000

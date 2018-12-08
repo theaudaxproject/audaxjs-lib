@@ -14295,7 +14295,7 @@ module.exports=[
   "slow",
   "slush",
   "small",
-  "smart",
+  "swift",
   "smile",
   "smoke",
   "smooth",
@@ -26827,7 +26827,7 @@ var ecdsa = require('./ecdsa')
 var randomBytes = require('randombytes')
 var typeforce = require('typeforce')
 var types = require('./types')
-var wif = require('wif-smart')
+var wif = require('wif-swift')
 
 var NETWORKS = require('./networks')
 var BigInteger = require('bigi')
@@ -26953,7 +26953,7 @@ ECPair.prototype.verify = function (hash, signature) {
 
 module.exports = ECPair
 
-},{"./address":85,"./crypto":88,"./ecdsa":89,"./networks":93,"./types":120,"bigi":37,"ecurve":61,"randombytes":74,"typeforce":123,"wif-smart":"wif-smart"}],91:[function(require,module,exports){
+},{"./address":85,"./crypto":88,"./ecdsa":89,"./networks":93,"./types":120,"bigi":37,"ecurve":61,"randombytes":74,"typeforce":123,"wif-swift":"wif-swift"}],91:[function(require,module,exports){
 (function (Buffer){
 var bip66 = require('bip66')
 var typeforce = require('typeforce')
@@ -30792,7 +30792,7 @@ function encodingLength (number) {
 module.exports = { encode: encode, decode: decode, encodingLength: encodingLength }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":4}],"bip32-utils-smart":[function(require,module,exports){
+},{"buffer":4}],"bip32-utils-swift":[function(require,module,exports){
 module.exports = {
   Account: require('./account'),
   Chain: require('./chain'),
@@ -31045,7 +31045,7 @@ module.exports = {
   amount: amount
 }
 
-},{"./address":85,"./block":86,"./bufferutils":87,"./crypto":88,"./ecpair":90,"./ecsignature":91,"./hdnode":92,"./networks":93,"./script":94,"./templates":96,"./transaction":118,"./transaction_builder":119,"bitcoin-ops":50}],"wif-smart":[function(require,module,exports){
+},{"./address":85,"./block":86,"./bufferutils":87,"./crypto":88,"./ecpair":90,"./ecsignature":91,"./hdnode":92,"./networks":93,"./script":94,"./templates":96,"./transaction":118,"./transaction_builder":119,"bitcoin-ops":50}],"wif-swift":[function(require,module,exports){
 (function (Buffer){
 var bs58swiftcheck = require('bs58swiftcheck')
 

@@ -3,7 +3,7 @@ var bcrypto = require('./crypto')
 var fastMerkleRoot = require('merkle-lib/fastRoot')
 var typeforce = require('typeforce')
 var types = require('./types')
-var varuint = require('varuint-swiftcash')
+var varuint = require('varuint-bitcoin')
 
 var Transaction = require('./transaction')
 

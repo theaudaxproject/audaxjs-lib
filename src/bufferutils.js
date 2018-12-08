@@ -1,5 +1,5 @@
-var pushdata = require('pushdata-swiftcash')
-var varuint = require('varuint-swiftcash')
+var pushdata = require('pushdata-bitcoin')
+var varuint = require('varuint-bitcoin')
 
 // https://github.com/feross/buffer/blob/master/index.js#L1127
 function verifuint (value, max) {

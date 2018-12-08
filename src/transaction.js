@@ -2,10 +2,10 @@ var Buffer = require('safe-buffer').Buffer
 var bcrypto = require('./crypto')
 var bscript = require('./script')
 var bufferutils = require('./bufferutils')
-var opcodes = require('swiftcash-ops')
+var opcodes = require('bitcoin-ops')
 var typeforce = require('typeforce')
 var types = require('./types')
-var varuint = require('varuint-swiftcash')
+var varuint = require('varuint-bitcoin')
 
 function varSliceSize (someScript) {
   var length = someScript.length

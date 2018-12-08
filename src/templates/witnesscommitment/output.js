@@ -4,7 +4,7 @@ var Buffer = require('safe-buffer').Buffer
 var bscript = require('../../script')
 var types = require('../../types')
 var typeforce = require('typeforce')
-var OPS = require('swiftcash-ops')
+var OPS = require('bitcoin-ops')
 
 var HEADER = Buffer.from('aa21a9ed', 'hex')
 

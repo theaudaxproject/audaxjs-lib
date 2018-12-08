@@ -24,7 +24,7 @@ module.exports = {
   address: require('./address'),
   crypto: require('./crypto'),
   networks: require('./networks'),
-  opcodes: require('swiftcash-ops'),
+  opcodes: require('bitcoin-ops'),
   script: script,
   amount: amount
 }

@@ -313,7 +313,7 @@ Transaction.prototype.hashForSignature = function (inIndex, prevOutScript, hashT
   buffer.writeInt32LE(hashType, buffer.length - 4)
   txTmp.__toBuffer(buffer, 0, false)
 
-  return bcrypto.sha256(buffer)
+  return bcrypto.hash256(buffer)
 }
 
 Transaction.prototype.hashForWitnessV0 = function (inIndex, prevOutScript, value, hashType) {
@@ -342,7 +342,7 @@ Transaction.prototype.hashForWitnessV0 = function (inIndex, prevOutScript, value
       writeUInt32(txIn.index)
     })
 
-    hashPrevouts = bcrypto.sha256(tbuffer)
+    hashPrevouts = bcrypto.hash256(tbuffer)
   }
 
   if (!(hashType & Transaction.SIGHASH_ANYONECANPAY) &&
@@ -355,7 +355,7 @@ Transaction.prototype.hashForWitnessV0 = function (inIndex, prevOutScript, value
       writeUInt32(txIn.sequence)
     })
 
-    hashSequence = bcrypto.sha256(tbuffer)
+    hashSequence = bcrypto.hash256(tbuffer)
   }
 
   if ((hashType & 0x1f) !== Transaction.SIGHASH_SINGLE &&
@@ -372,7 +372,7 @@ Transaction.prototype.hashForWitnessV0 = function (inIndex, prevOutScript, value
       writeVarSlice(out.script)
     })
 
-    hashOutputs = bcrypto.sha256(tbuffer)
+    hashOutputs = bcrypto.hash256(tbuffer)
   } else if ((hashType & 0x1f) === Transaction.SIGHASH_SINGLE && inIndex < this.outs.length) {
     var output = this.outs[inIndex]
 
@@ -381,7 +381,7 @@ Transaction.prototype.hashForWitnessV0 = function (inIndex, prevOutScript, value
     writeUInt64(output.value)
     writeVarSlice(output.script)
 
-    hashOutputs = bcrypto.sha256(tbuffer)
+    hashOutputs = bcrypto.hash256(tbuffer)
   }
 
   tbuffer = Buffer.allocUnsafe(156 + varSliceSize(prevOutScript))
@@ -399,11 +399,11 @@ Transaction.prototype.hashForWitnessV0 = function (inIndex, prevOutScript, value
   writeSlice(hashOutputs)
   writeUInt32(this.locktime)
   writeUInt32(hashType)
-  return bcrypto.sha256(tbuffer)
+  return bcrypto.hash256(tbuffer)
 }
 
 Transaction.prototype.getHash = function () {
-  return bcrypto.sha256(this.__toBuffer(undefined, undefined, false))
+  return bcrypto.hash256(this.__toBuffer(undefined, undefined, false))
 }
 
 Transaction.prototype.getId = function () {

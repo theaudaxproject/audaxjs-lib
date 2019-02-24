@@ -1,6 +1,6 @@
 module.exports = {
   swiftcash: {
-    messagePrefix: 'DarkNet Signed Message:\n',
+    messagePrefix: 'SwiftCash Signed Message:\n',
     bech32: 'bc',
     bip32: {
       public: 0x0488b21e,

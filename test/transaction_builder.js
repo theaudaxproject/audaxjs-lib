@@ -95,7 +95,7 @@ describe('TransactionBuilder', function () {
   describe('fromTransaction', function () {
     fixtures.valid.build.forEach(function (f) {
       it('returns TransactionBuilder, with ' + f.description, function () {
-        var network = NETWORKS[f.network || 'swiftcash']
+        var network = NETWORKS[f.network || 'audaxjs']
 
         var tx = Transaction.fromHex(f.txHex)
         var txb = TransactionBuilder.fromTransaction(tx, network)

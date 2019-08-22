@@ -469,7 +469,7 @@ function buildInput (input, allowIncomplete) {
 
 function TransactionBuilder (network, maximumFeeRate) {
   this.prevTxMap = {}
-  this.network = network || networks.swiftcash
+  this.network = network || networks.audaxjs
 
   // WARNING: This is __NOT__ to be relied on, its just another potential safety mechanism (safety in-depth)
   this.maximumFeeRate = maximumFeeRate || 1000

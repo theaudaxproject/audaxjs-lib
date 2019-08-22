@@ -1,31 +1,31 @@
 /* global describe, it */
 
 var assert = require('assert')
-var swiftcash = require('../../')
+var audaxjs = require('../../')
 var testnetUtils = require('./_testnet')
 
-var testnet = swiftcash.networks.testnet
-var alice = swiftcash.ECPair.fromWIF('cScfkGjbzzoeewVWmU2hYPUHeVGJRDdFt7WhmrVVGkxpmPP8BHWe', testnet)
-var bob = swiftcash.ECPair.fromWIF('cMkopUXKWsEzAjfa1zApksGRwjVpJRB3831qM9W4gKZsLwjHXA9x', testnet)
+var testnet = audaxjs.networks.testnet
+var alice = audaxjs.ECPair.fromWIF('cScfkGjbzzoeewVWmU2hYPUHeVGJRDdFt7WhmrVVGkxpmPP8BHWe', testnet)
+var bob = audaxjs.ECPair.fromWIF('cMkopUXKWsEzAjfa1zApksGRwjVpJRB3831qM9W4gKZsLwjHXA9x', testnet)
 
-describe('swiftcashjs-lib (transactions w/ CLTV)', function () {
-  var hashType = swiftcash.Transaction.SIGHASH_ALL
+describe('audaxjs-lib (transactions w/ CLTV)', function () {
+  var hashType = audaxjs.Transaction.SIGHASH_ALL
 
   // IF MTP > utcSeconds, aQ can redeem, ELSE bQ, aQ joint redeem
   function cltvCheckSigOutput (aQ, bQ, utcSeconds) {
-    return swiftcash.script.compile([
-      swiftcash.opcodes.OP_IF,
-      swiftcash.script.number.encode(utcSeconds),
-      swiftcash.opcodes.OP_CHECKLOCKTIMEVERIFY,
-      swiftcash.opcodes.OP_DROP,
+    return audaxjs.script.compile([
+      audaxjs.opcodes.OP_IF,
+      audaxjs.script.number.encode(utcSeconds),
+      audaxjs.opcodes.OP_CHECKLOCKTIMEVERIFY,
+      audaxjs.opcodes.OP_DROP,
 
-      swiftcash.opcodes.OP_ELSE,
+      audaxjs.opcodes.OP_ELSE,
       bQ.getPublicKeyBuffer(),
-      swiftcash.opcodes.OP_CHECKSIGVERIFY,
-      swiftcash.opcodes.OP_ENDIF,
+      audaxjs.opcodes.OP_CHECKSIGVERIFY,
+      audaxjs.opcodes.OP_ENDIF,
 
       aQ.getPublicKeyBuffer(),
-      swiftcash.opcodes.OP_CHECKSIG
+      audaxjs.opcodes.OP_CHECKSIG
     ])
   }
 
@@ -40,14 +40,14 @@ describe('swiftcashjs-lib (transactions w/ CLTV)', function () {
     // three hours ago
     var timeUtc = utcNow() - (3600 * 3)
     var redeemScript = cltvCheckSigOutput(alice, bob, timeUtc)
-    var scriptPubKey = swiftcash.script.scriptHash.output.encode(swiftcash.crypto.hash160(redeemScript))
-    var address = swiftcash.address.fromOutputScript(scriptPubKey, testnet)
+    var scriptPubKey = audaxjs.script.scriptHash.output.encode(audaxjs.crypto.hash160(redeemScript))
+    var address = audaxjs.address.fromOutputScript(scriptPubKey, testnet)
 
     // fund the P2SH(CLTV) address
     testnetUtils.faucet(address, 2e4, function (err, unspent) {
       if (err) return done(err)
 
-      var tx = new swiftcash.TransactionBuilder(testnet)
+      var tx = new audaxjs.TransactionBuilder(testnet)
       tx.setLockTime(timeUtc)
       tx.addInput(unspent.txId, 0, 0xfffffffe)
       tx.addOutput(testnetUtils.RETURN_ADDRESS, 1e4)
@@ -56,9 +56,9 @@ describe('swiftcashjs-lib (transactions w/ CLTV)', function () {
       var signatureHash = txRaw.hashForSignature(0, redeemScript, hashType)
 
       // {Alice's signature} OP_TRUE
-      var redeemScriptSig = swiftcash.script.scriptHash.input.encode([
+      var redeemScriptSig = audaxjs.script.scriptHash.input.encode([
         alice.sign(signatureHash).toScriptSignature(hashType),
-        swiftcash.opcodes.OP_TRUE
+        audaxjs.opcodes.OP_TRUE
       ], redeemScript)
 
       txRaw.setInputScript(0, redeemScriptSig)
@@ -74,24 +74,24 @@ describe('swiftcashjs-lib (transactions w/ CLTV)', function () {
     // two hours ago
     var timeUtc = utcNow() - (3600 * 2)
     var redeemScript = cltvCheckSigOutput(alice, bob, timeUtc)
-    var scriptPubKey = swiftcash.script.scriptHash.output.encode(swiftcash.crypto.hash160(redeemScript))
-    var address = swiftcash.address.fromOutputScript(scriptPubKey, testnet)
+    var scriptPubKey = audaxjs.script.scriptHash.output.encode(audaxjs.crypto.hash160(redeemScript))
+    var address = audaxjs.address.fromOutputScript(scriptPubKey, testnet)
 
     // fund the P2SH(CLTV) address
     testnetUtils.faucet(address, 2e4, function (err, unspent) {
       if (err) return done(err)
 
-      var tx = new swiftcash.TransactionBuilder(testnet)
+      var tx = new audaxjs.TransactionBuilder(testnet)
       tx.setLockTime(timeUtc)
       tx.addInput(unspent.txId, 0, 0xfffffffe)
       tx.addOutput(testnetUtils.RETURN_ADDRESS, 1e4)
 
       var txRaw = tx.buildIncomplete()
       var signatureHash = txRaw.hashForSignature(0, redeemScript, hashType)
-      var redeemScriptSig = swiftcash.script.scriptHash.input.encode([
+      var redeemScriptSig = audaxjs.script.scriptHash.input.encode([
         alice.sign(signatureHash).toScriptSignature(hashType),
         bob.sign(signatureHash).toScriptSignature(hashType),
-        swiftcash.opcodes.OP_FALSE
+        audaxjs.opcodes.OP_FALSE
       ], redeemScript)
 
       txRaw.setInputScript(0, redeemScriptSig)
@@ -107,14 +107,14 @@ describe('swiftcashjs-lib (transactions w/ CLTV)', function () {
     // two hours from now
     var timeUtc = utcNow() + (3600 * 2)
     var redeemScript = cltvCheckSigOutput(alice, bob, timeUtc)
-    var scriptPubKey = swiftcash.script.scriptHash.output.encode(swiftcash.crypto.hash160(redeemScript))
-    var address = swiftcash.address.fromOutputScript(scriptPubKey, testnet)
+    var scriptPubKey = audaxjs.script.scriptHash.output.encode(audaxjs.crypto.hash160(redeemScript))
+    var address = audaxjs.address.fromOutputScript(scriptPubKey, testnet)
 
     // fund the P2SH(CLTV) address
     testnetUtils.faucet(address, 2e4, function (err, unspent) {
       if (err) return done(err)
 
-      var tx = new swiftcash.TransactionBuilder(testnet)
+      var tx = new audaxjs.TransactionBuilder(testnet)
       tx.setLockTime(timeUtc)
       tx.addInput(unspent.txId, 0, 0xfffffffe)
       tx.addOutput(testnetUtils.RETURN_ADDRESS, 1e4)
@@ -123,9 +123,9 @@ describe('swiftcashjs-lib (transactions w/ CLTV)', function () {
       var signatureHash = txRaw.hashForSignature(0, redeemScript, hashType)
 
       // {Alice's signature} OP_TRUE
-      var redeemScriptSig = swiftcash.script.scriptHash.input.encode([
+      var redeemScriptSig = audaxjs.script.scriptHash.input.encode([
         alice.sign(signatureHash).toScriptSignature(hashType),
-        swiftcash.opcodes.OP_TRUE
+        audaxjs.opcodes.OP_TRUE
       ], redeemScript)
 
       txRaw.setInputScript(0, redeemScriptSig)

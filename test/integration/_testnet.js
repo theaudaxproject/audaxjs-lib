@@ -1,5 +1,5 @@
 var async = require('async')
-var swiftcash = require('../../')
+var audaxjs = require('../../')
 var Blockchain = require('cb-http-client')
 var coinSelect = require('coinselect')
 var dhttp = require('dhttp/200')
@@ -8,8 +8,8 @@ var types = require('../../src/types')
 
 var BLOCKTRAIL_API_KEY = process.env.BLOCKTRAIL_API_KEY || 'c0bd8155c66e3fb148bb1664adc1e4dacd872548'
 var blockchain = new Blockchain('https://api.blocktrail.com/cb/v0.2.1/tBTC', { api_key: BLOCKTRAIL_API_KEY })
-var kpNetwork = swiftcash.networks.testnet
-var keyPair = swiftcash.ECPair.fromWIF('cQqjeq2rxqwnqwMewJhkNtJDixtX8ctA4bYoWHdxY4xRPVvAEjmk', kpNetwork)
+var kpNetwork = audaxjs.networks.testnet
+var keyPair = audaxjs.ECPair.fromWIF('cQqjeq2rxqwnqwMewJhkNtJDixtX8ctA4bYoWHdxY4xRPVvAEjmk', kpNetwork)
 var kpAddress = keyPair.getAddress()
 var conflicts = {}
 
@@ -22,7 +22,7 @@ function fundAddress (unspents, outputs, callback) {
   var result = coinSelect(unspents, outputs, 10)
   if (!result.inputs) return callback(new Error('Faucet empty'))
 
-  var txb = new swiftcash.TransactionBuilder(kpNetwork)
+  var txb = new audaxjs.TransactionBuilder(kpNetwork)
   result.inputs.forEach(function (x) {
     conflicts[x.txId + x.vout] = true
     txb.addInput(x.txId, x.vout)

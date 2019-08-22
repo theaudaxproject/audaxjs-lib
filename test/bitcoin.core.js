@@ -2,7 +2,7 @@
 
 var assert = require('assert')
 var base58 = require('bs58')
-var swiftcash = require('../')
+var audaxjs = require('../')
 
 var base58EncodeDecode = require('./fixtures/core/base58_encode_decode.json')
 var base58KeysInvalid = require('./fixtures/core/base58_keys_invalid.json')
@@ -13,7 +13,7 @@ var sigHash = require('./fixtures/core/sighash.json')
 var sigNoncanonical = require('./fixtures/core/sig_noncanonical.json')
 var txValid = require('./fixtures/core/tx_valid.json')
 
-describe('swiftcash-core', function () {
+describe('audaxjs-core', function () {
   // base58EncodeDecode
   describe('base58', function () {
     base58EncodeDecode.forEach(function (f) {
@@ -50,11 +50,11 @@ describe('swiftcash-core', function () {
 
       if (params.isPrivkey) return
 
-      var network = params.isTestnet ? swiftcash.networks.testnet : swiftcash.networks.swiftcash
+      var network = params.isTestnet ? audaxjs.networks.testnet : audaxjs.networks.audaxjs
       var version = network[typeMap[params.addrType]]
 
       it('can export ' + expected, function () {
-        assert.strictEqual(swiftcash.address.toBase58Check(hash, version), expected)
+        assert.strictEqual(audaxjs.address.toBase58Check(hash, version), expected)
       })
     })
   })
@@ -62,10 +62,10 @@ describe('swiftcash-core', function () {
   // base58KeysInvalid
   describe('address.fromBase58Check', function () {
     var allowedNetworks = [
-      swiftcash.networks.swiftcash.pubkeyhash,
-      swiftcash.networks.swiftcash.scripthash,
-      swiftcash.networks.testnet.pubkeyhash,
-      swiftcash.networks.testnet.scripthash
+      audaxjs.networks.audaxjs.pubkeyhash,
+      audaxjs.networks.audaxjs.scripthash,
+      audaxjs.networks.testnet.pubkeyhash,
+      audaxjs.networks.testnet.scripthash
     ]
 
     base58KeysInvalid.forEach(function (f) {
@@ -73,7 +73,7 @@ describe('swiftcash-core', function () {
 
       it('throws on ' + string, function () {
         assert.throws(function () {
-          var address = swiftcash.address.fromBase58Check(string)
+          var address = audaxjs.address.fromBase58Check(string)
 
           assert.notEqual(allowedNetworks.indexOf(address.version), -1, 'Invalid network')
         }, /(Invalid (checksum|network))|(too (short|long))/)
@@ -90,8 +90,8 @@ describe('swiftcash-core', function () {
 
       if (!params.isPrivkey) return
 
-      var network = params.isTestnet ? swiftcash.networks.testnet : swiftcash.networks.swiftcash
-      var keyPair = swiftcash.ECPair.fromWIF(string, network)
+      var network = params.isTestnet ? audaxjs.networks.testnet : audaxjs.networks.audaxjs
+      var keyPair = audaxjs.ECPair.fromWIF(string, network)
 
       it('fromWIF imports ' + string, function () {
         assert.strictEqual(keyPair.d.toHex(), hex)
@@ -107,8 +107,8 @@ describe('swiftcash-core', function () {
   // base58KeysInvalid
   describe('ECPair.fromWIF', function () {
     var allowedNetworks = [
-      swiftcash.networks.swiftcash,
-      swiftcash.networks.testnet
+      audaxjs.networks.audaxjs,
+      audaxjs.networks.testnet
     ]
 
     base58KeysInvalid.forEach(function (f) {
@@ -116,7 +116,7 @@ describe('swiftcash-core', function () {
 
       it('throws on ' + string, function () {
         assert.throws(function () {
-          swiftcash.ECPair.fromWIF(string, allowedNetworks)
+          audaxjs.ECPair.fromWIF(string, allowedNetworks)
         }, /(Invalid|Unknown) (checksum|compression flag|network version|WIF length)/)
       })
     })
@@ -125,7 +125,7 @@ describe('swiftcash-core', function () {
   describe('Block.fromHex', function () {
     blocksValid.forEach(function (f) {
       it('can parse ' + f.id, function () {
-        var block = swiftcash.Block.fromHex(f.hex)
+        var block = audaxjs.Block.fromHex(f.hex)
 
         assert.strictEqual(block.getId(), f.id)
         assert.strictEqual(block.transactions.length, f.transactions)
@@ -144,7 +144,7 @@ describe('swiftcash-core', function () {
       //      var verifyFlags = f[2] // TODO: do we need to test this?
 
       it('can decode ' + fhex, function () {
-        var transaction = swiftcash.Transaction.fromHex(fhex)
+        var transaction = audaxjs.Transaction.fromHex(fhex)
 
         transaction.ins.forEach(function (txIn, i) {
           var input = inputs[i]
@@ -175,20 +175,20 @@ describe('swiftcash-core', function () {
       var expectedHash = f[4]
 
       var hashTypes = []
-      if ((hashType & 0x1f) === swiftcash.Transaction.SIGHASH_NONE) hashTypes.push('SIGHASH_NONE')
-      else if ((hashType & 0x1f) === swiftcash.Transaction.SIGHASH_SINGLE) hashTypes.push('SIGHASH_SINGLE')
+      if ((hashType & 0x1f) === audaxjs.Transaction.SIGHASH_NONE) hashTypes.push('SIGHASH_NONE')
+      else if ((hashType & 0x1f) === audaxjs.Transaction.SIGHASH_SINGLE) hashTypes.push('SIGHASH_SINGLE')
       else hashTypes.push('SIGHASH_ALL')
-      if (hashType & swiftcash.Transaction.SIGHASH_ANYONECANPAY) hashTypes.push('SIGHASH_ANYONECANPAY')
+      if (hashType & audaxjs.Transaction.SIGHASH_ANYONECANPAY) hashTypes.push('SIGHASH_ANYONECANPAY')
 
       var hashTypeName = hashTypes.join(' | ')
 
       it('should hash ' + txHex.slice(0, 40) + '... (' + hashTypeName + ')', function () {
-        var transaction = swiftcash.Transaction.fromHex(txHex)
+        var transaction = audaxjs.Transaction.fromHex(txHex)
         assert.strictEqual(transaction.toHex(), txHex)
 
         var script = Buffer.from(scriptHex, 'hex')
-        var scriptChunks = swiftcash.script.decompile(script)
-        assert.strictEqual(swiftcash.script.compile(scriptChunks).toString('hex'), scriptHex)
+        var scriptChunks = audaxjs.script.decompile(script)
+        assert.strictEqual(audaxjs.script.compile(scriptChunks).toString('hex'), scriptHex)
 
         var hash = transaction.hashForSignature(inIndex, script, hashType)
 
@@ -203,7 +203,7 @@ describe('swiftcash-core', function () {
       var buffer = Buffer.from(hex, 'hex')
 
       it('can parse ' + hex, function () {
-        var parsed = swiftcash.ECSignature.parseScriptSignature(buffer)
+        var parsed = audaxjs.ECSignature.parseScriptSignature(buffer)
         var actual = parsed.signature.toScriptSignature(parsed.hashType)
         assert.strictEqual(actual.toString('hex'), hex)
       })
@@ -218,7 +218,7 @@ describe('swiftcash-core', function () {
 
       it('throws on ' + description, function () {
         assert.throws(function () {
-          swiftcash.ECSignature.parseScriptSignature(buffer)
+          audaxjs.ECSignature.parseScriptSignature(buffer)
         }, /Expected DER (integer|sequence)|(R|S) value (excessively padded|is negative)|(R|S|DER sequence) length is (zero|too short|too long|invalid)|Invalid hashType/)
       })
     })

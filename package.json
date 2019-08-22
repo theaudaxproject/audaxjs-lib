@@ -1,20 +1,20 @@
 {
-  "name": "swiftcashjs-lib",
+  "name": "audaxjs-lib",
   "version": "2.0.0",
-  "description": "Client-side SwiftCash JavaScript library",
+  "description": "Client-side Audax JavaScript library",
   "main": "./src/index.js",
   "engines": {
     "node": ">=8.0.0"
   },
   "keywords": [
-    "swiftcashjs",
-    "swiftcash",
+    "audaxjs",
+    "audaxjs",
     "browserify",
     "javascript"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/swiftcashproject/swiftcashjs-lib.git"
+    "url": "https://github.com/theaudaxproject/audaxjs-lib.git"
   },
   "files": [
     "src"
@@ -24,7 +24,7 @@
     "bigi": "^1.4.0",
     "bip66": "^1.1.0",
     "bitcoin-ops": "^1.3.0",
-    "bs58swiftcheck": "^1.0.0",
+    "bs58audaxcheck": "^1.0.0",
     "create-hash": "^1.1.0",
     "create-hmac": "^1.1.3",
     "ecurve": "^1.0.0",
@@ -34,7 +34,7 @@
     "safe-buffer": "^5.0.1",
     "typeforce": "^1.11.3",
     "varuint-bitcoin": "^1.0.4",
-    "wif-swift": "^1.0.0"
+    "wif-audax": "^1.0.0"
   },
   "devDependencies": {
     "async": "^2.0.1",

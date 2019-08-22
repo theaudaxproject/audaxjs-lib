@@ -2,32 +2,32 @@
 
 var assert = require('assert')
 var bigi = require('bigi')
-var swiftcash = require('../../')
+var audaxjs = require('../../')
 var dhttp = require('dhttp/200')
 
 // deterministic RNG for testing only
 function rng () { return Buffer.from('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz') }
 
-describe('swiftcashjs-lib (addresses)', function () {
+describe('audaxjs-lib (addresses)', function () {
   it('can generate a random address', function () {
-    var keyPair = swiftcash.ECPair.makeRandom({ rng: rng })
+    var keyPair = audaxjs.ECPair.makeRandom({ rng: rng })
     var address = keyPair.getAddress()
 
     assert.strictEqual(address, '1F5VhMHukdnUES9kfXqzPzMeF1GPHKiF64')
   })
 
   it('can generate an address from a SHA256 hash', function () {
-    var hash = swiftcash.crypto.sha256('correct horse battery staple')
+    var hash = audaxjs.crypto.sha256('correct horse battery staple')
     var d = bigi.fromBuffer(hash)
 
-    var keyPair = new swiftcash.ECPair(d)
+    var keyPair = new audaxjs.ECPair(d)
     var address = keyPair.getAddress()
 
     assert.strictEqual(address, '1C7zdTfnkzmr13HfA2vNm5SJYRK6nEKyq8')
   })
 
   it('can import an address via WIF', function () {
-    var keyPair = swiftcash.ECPair.fromWIF('Kxr9tQED9H44gCmp6HAdmemAzU3n84H3dGkuWTKvE23JgHMW8gct')
+    var keyPair = audaxjs.ECPair.fromWIF('Kxr9tQED9H44gCmp6HAdmemAzU3n84H3dGkuWTKvE23JgHMW8gct')
     var address = keyPair.getAddress()
 
     assert.strictEqual(address, '19AAjaTUbRjQCMuVczepkoPswiZRhjtg31')
@@ -40,30 +40,30 @@ describe('swiftcashjs-lib (addresses)', function () {
       '03c6103b3b83e4a24a0e33a4df246ef11772f9992663db0c35759a5e2ebf68d8e9'
     ].map(function (hex) { return Buffer.from(hex, 'hex') })
 
-    var redeemScript = swiftcash.script.multisig.output.encode(2, pubKeys) // 2 of 3
-    var scriptPubKey = swiftcash.script.scriptHash.output.encode(swiftcash.crypto.hash160(redeemScript))
-    var address = swiftcash.address.fromOutputScript(scriptPubKey)
+    var redeemScript = audaxjs.script.multisig.output.encode(2, pubKeys) // 2 of 3
+    var scriptPubKey = audaxjs.script.scriptHash.output.encode(audaxjs.crypto.hash160(redeemScript))
+    var address = audaxjs.address.fromOutputScript(scriptPubKey)
 
     assert.strictEqual(address, '36NUkt6FWUi3LAWBqWRdDmdTWbt91Yvfu7')
   })
 
   it('can generate a SegWit address', function () {
-    var keyPair = swiftcash.ECPair.fromWIF('Kxr9tQED9H44gCmp6HAdmemAzU3n84H3dGkuWTKvE23JgHMW8gct')
+    var keyPair = audaxjs.ECPair.fromWIF('Kxr9tQED9H44gCmp6HAdmemAzU3n84H3dGkuWTKvE23JgHMW8gct')
     var pubKey = keyPair.getPublicKeyBuffer()
 
-    var scriptPubKey = swiftcash.script.witnessPubKeyHash.output.encode(swiftcash.crypto.hash160(pubKey))
-    var address = swiftcash.address.fromOutputScript(scriptPubKey)
+    var scriptPubKey = audaxjs.script.witnessPubKeyHash.output.encode(audaxjs.crypto.hash160(pubKey))
+    var address = audaxjs.address.fromOutputScript(scriptPubKey)
 
     assert.strictEqual(address, 'bc1qt97wqg464zrhnx23upykca5annqvwkwujjglky')
   })
 
   it('can generate a SegWit address (via P2SH)', function () {
-    var keyPair = swiftcash.ECPair.fromWIF('Kxr9tQED9H44gCmp6HAdmemAzU3n84H3dGkuWTKvE23JgHMW8gct')
+    var keyPair = audaxjs.ECPair.fromWIF('Kxr9tQED9H44gCmp6HAdmemAzU3n84H3dGkuWTKvE23JgHMW8gct')
     var pubKey = keyPair.getPublicKeyBuffer()
 
-    var witnessScript = swiftcash.script.witnessPubKeyHash.output.encode(swiftcash.crypto.hash160(pubKey))
-    var scriptPubKey = swiftcash.script.scriptHash.output.encode(swiftcash.crypto.hash160(witnessScript))
-    var address = swiftcash.address.fromOutputScript(scriptPubKey)
+    var witnessScript = audaxjs.script.witnessPubKeyHash.output.encode(audaxjs.crypto.hash160(pubKey))
+    var scriptPubKey = audaxjs.script.scriptHash.output.encode(audaxjs.crypto.hash160(witnessScript))
+    var address = audaxjs.address.fromOutputScript(scriptPubKey)
 
     assert.strictEqual(address, '34AgLJhwXrvmkZS1o5TrcdeevMt22Nar53')
   })
@@ -76,9 +76,9 @@ describe('swiftcashjs-lib (addresses)', function () {
       '03c6103b3b83e4a24a0e33a4df246ef11772f9992663db0c35759a5e2ebf68d8e9'
     ].map(function (hex) { return Buffer.from(hex, 'hex') })
 
-    var witnessScript = swiftcash.script.multisig.output.encode(3, pubKeys) // 3 of 4
-    var scriptPubKey = swiftcash.script.witnessScriptHash.output.encode(swiftcash.crypto.sha256(witnessScript))
-    var address = swiftcash.address.fromOutputScript(scriptPubKey)
+    var witnessScript = audaxjs.script.multisig.output.encode(3, pubKeys) // 3 of 4
+    var scriptPubKey = audaxjs.script.witnessScriptHash.output.encode(audaxjs.crypto.sha256(witnessScript))
+    var address = audaxjs.address.fromOutputScript(scriptPubKey)
 
     assert.strictEqual(address, 'bc1q75f6dv4q8ug7zhujrsp5t0hzf33lllnr3fe7e2pra3v24mzl8rrqtp3qul')
   })
@@ -89,16 +89,16 @@ describe('swiftcashjs-lib (addresses)', function () {
       '02c96db2302d19b43d4c69368babace7854cc84eb9e061cde51cfa77ca4a22b8b9'
     ].map(function (hex) { return Buffer.from(hex, 'hex') })
 
-    var witnessScript = swiftcash.script.multisig.output.encode(2, pubKeys) // 2 of 2
-    var redeemScript = swiftcash.script.witnessScriptHash.output.encode(swiftcash.crypto.sha256(witnessScript))
-    var scriptPubKey = swiftcash.script.scriptHash.output.encode(swiftcash.crypto.hash160(redeemScript))
-    var address = swiftcash.address.fromOutputScript(scriptPubKey)
+    var witnessScript = audaxjs.script.multisig.output.encode(2, pubKeys) // 2 of 2
+    var redeemScript = audaxjs.script.witnessScriptHash.output.encode(audaxjs.crypto.sha256(witnessScript))
+    var scriptPubKey = audaxjs.script.scriptHash.output.encode(audaxjs.crypto.hash160(redeemScript))
+    var address = audaxjs.address.fromOutputScript(scriptPubKey)
 
     assert.strictEqual(address, '3P4mrxQfmExfhxqjLnR2Ah4WES5EB1KBrN')
   })
 
   it('can support the retrieval of transactions for an address (3rd party blockchain)', function (done) {
-    var keyPair = swiftcash.ECPair.makeRandom()
+    var keyPair = audaxjs.ECPair.makeRandom()
     var address = keyPair.getAddress()
 
     dhttp({
@@ -119,8 +119,8 @@ describe('swiftcashjs-lib (addresses)', function () {
 
   // other networks
   it('can generate a Testnet address', function () {
-    var testnet = swiftcash.networks.testnet
-    var keyPair = swiftcash.ECPair.makeRandom({ network: testnet, rng: rng })
+    var testnet = audaxjs.networks.testnet
+    var keyPair = audaxjs.ECPair.makeRandom({ network: testnet, rng: rng })
     var wif = keyPair.toWIF()
     var address = keyPair.getAddress()
 
@@ -129,8 +129,8 @@ describe('swiftcashjs-lib (addresses)', function () {
   })
 
   it('can generate a Litecoin address', function () {
-    var litecoin = swiftcash.networks.litecoin
-    var keyPair = swiftcash.ECPair.makeRandom({ network: litecoin, rng: rng })
+    var litecoin = audaxjs.networks.litecoin
+    var keyPair = audaxjs.ECPair.makeRandom({ network: litecoin, rng: rng })
     var wif = keyPair.toWIF()
     var address = keyPair.getAddress()
 

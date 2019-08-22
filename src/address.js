@@ -1,6 +1,6 @@
 var Buffer = require('safe-buffer').Buffer
 var bech32 = require('bech32')
-var bs58check = require('bs58swiftcheck')
+var bs58check = require('bs58audaxcheck')
 var bscript = require('./script')
 var btemplates = require('./templates')
 var networks = require('./networks')
@@ -49,7 +49,7 @@ function toBech32 (data, version, prefix) {
 }
 
 function fromOutputScript (outputScript, network) {
-  network = network || networks.swiftcash
+  network = network || networks.audaxjs
 
   if (btemplates.pubKeyHash.output.check(outputScript)) return toBase58Check(bscript.compile(outputScript).slice(3, 23), network.pubKeyHash)
   if (btemplates.scriptHash.output.check(outputScript)) return toBase58Check(bscript.compile(outputScript).slice(2, 22), network.scriptHash)
@@ -60,7 +60,7 @@ function fromOutputScript (outputScript, network) {
 }
 
 function toOutputScript (address, network) {
-  network = network || networks.swiftcash
+  network = network || networks.audaxjs
 
   var decode
   try {

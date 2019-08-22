@@ -4,7 +4,7 @@ var ecdsa = require('./ecdsa')
 var randomBytes = require('randombytes')
 var typeforce = require('typeforce')
 var types = require('./types')
-var wif = require('wif-swift')
+var wif = require('wif-audax')
 
 var NETWORKS = require('./networks')
 var BigInteger = require('bigi')
@@ -35,7 +35,7 @@ function ECPair (d, Q, options) {
   }
 
   this.compressed = options.compressed === undefined ? true : options.compressed
-  this.network = options.network || NETWORKS.swiftcash
+  this.network = options.network || NETWORKS.audaxjs
 }
 
 Object.defineProperty(ECPair.prototype, 'Q', {
@@ -69,9 +69,9 @@ ECPair.fromWIF = function (string, network) {
 
     if (!network) throw new Error('Unknown network version')
 
-  // otherwise, assume a network object (or default to swiftcash)
+  // otherwise, assume a network object (or default to audaxjs)
   } else {
-    network = network || NETWORKS.swiftcash
+    network = network || NETWORKS.audaxjs
 
     if (version !== network.wif) throw new Error('Invalid network version')
   }

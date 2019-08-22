@@ -1,24 +1,24 @@
 module.exports = {
-  swiftcash: {
-    messagePrefix: 'SwiftCash Signed Message:\n',
-    bech32: 'bc',
+  audaxjs: {
+    messagePrefix: 'Audax Signed Message:\n',
+    bech32: 'bo',
     bip32: {
-      public: 0x0488b21e,
-      private: 0x0488ade4
+      public: 0x022D2533,
+      private: 0x0221312B
     },
-    pubKeyHash: 0x3f,
-    scriptHash: 0x12,
-    wif: 0xbf
+    pubKeyHash: 0x17,
+    scriptHash: 0x08,
+    wif: 0x8E
   },
   testnet: {
     messagePrefix: 'DarkNet Signed Message:\n',
     bech32: 'tb',
     bip32: {
-      public: 0x043587cf,
-      private: 0x04358394
+      public: 0x3a8061a0,
+      private: 0x3a805837
     },
-    pubKeyHash: 0x41,
-    scriptHash: 0x0b,
-    wif: 0xbc
+    pubKeyHash: 0x3A,
+    scriptHash: 0x42,
+    wif: 0x38
   },
 }

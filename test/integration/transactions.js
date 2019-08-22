@@ -1,19 +1,19 @@
 /* global describe, it */
 
 var assert = require('assert')
-var swiftcash = require('../../')
+var audaxjs = require('../../')
 var dhttp = require('dhttp/200')
-var testnet = swiftcash.networks.testnet
+var testnet = audaxjs.networks.testnet
 var testnetUtils = require('./_testnet')
 
 function rng () {
   return Buffer.from('YT8dAtK4d16A3P1z+TpwB2jJ4aFH3g9M1EioIBkLEV4=', 'base64')
 }
 
-describe('swiftcashjs-lib (transactions)', function () {
+describe('audaxjs-lib (transactions)', function () {
   it('can create a 1-to-1 Transaction', function () {
-    var alice = swiftcash.ECPair.fromWIF('L1uyy5qTuGrVXrmrsvHWHgVzW9kKdrp27wBC7Vs6nZDTF2BRUVwy')
-    var tx = new swiftcash.TransactionBuilder()
+    var alice = audaxjs.ECPair.fromWIF('L1uyy5qTuGrVXrmrsvHWHgVzW9kKdrp27wBC7Vs6nZDTF2BRUVwy')
+    var tx = new audaxjs.TransactionBuilder()
 
     tx.addInput('61d520ccb74288c96bc1a2b20ea1c0d5a704776dd0164a396efec3ea7040349d', 0) // Alice's previous transaction output, has 15000 satoshis
     tx.addOutput('1cMh228HTCiwS8ZsaakH8A8wze1JR5ZsP', 12000)
@@ -21,15 +21,15 @@ describe('swiftcashjs-lib (transactions)', function () {
 
     tx.sign(0, alice)
 
-    // prepare for broadcast to the swiftcash network, see "can broadcast a Transaction" below
+    // prepare for broadcast to the audaxjs network, see "can broadcast a Transaction" below
     assert.strictEqual(tx.build().toHex(), '01000000019d344070eac3fe6e394a16d06d7704a7d5c0a10eb2a2c16bc98842b7cc20d561000000006b48304502210088828c0bdfcdca68d8ae0caeb6ec62cd3fd5f9b2191848edae33feb533df35d302202e0beadd35e17e7f83a733f5277028a9b453d525553e3f5d2d7a7aa8010a81d60121029f50f51d63b345039a290c94bffd3180c99ed659ff6ea6b1242bca47eb93b59fffffffff01e02e0000000000001976a91406afd46bcdfd22ef94ac122aa11f241244a37ecc88ac00000000')
   })
 
   it('can create a 2-to-2 Transaction', function () {
-    var alice = swiftcash.ECPair.fromWIF('L1Knwj9W3qK3qMKdTvmg3VfzUs3ij2LETTFhxza9LfD5dngnoLG1')
-    var bob = swiftcash.ECPair.fromWIF('KwcN2pT3wnRAurhy7qMczzbkpY5nXMW2ubh696UBc1bcwctTx26z')
+    var alice = audaxjs.ECPair.fromWIF('L1Knwj9W3qK3qMKdTvmg3VfzUs3ij2LETTFhxza9LfD5dngnoLG1')
+    var bob = audaxjs.ECPair.fromWIF('KwcN2pT3wnRAurhy7qMczzbkpY5nXMW2ubh696UBc1bcwctTx26z')
 
-    var tx = new swiftcash.TransactionBuilder()
+    var tx = new audaxjs.TransactionBuilder()
     tx.addInput('b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c', 6) // Alice's previous transaction output, has 200000 satoshis
     tx.addInput('7d865e959b2466918c9863afca942d0fb89d7c9ac0c99bafc3749504ded97730', 0) // Bob's previous transaction output, has 300000 satoshis
     tx.addOutput('1CUNEBjYrCn2y1SdiUMohaKUi4wpP326Lb', 180000)
@@ -39,16 +39,16 @@ describe('swiftcashjs-lib (transactions)', function () {
     tx.sign(1, bob) // Bob signs his input, which was the second input (1th)
     tx.sign(0, alice) // Alice signs her input, which was the first input (0th)
 
-    // prepare for broadcast to the swiftcash network, see "can broadcast a Transaction" below
+    // prepare for broadcast to the audaxjs network, see "can broadcast a Transaction" below
     assert.strictEqual(tx.build().toHex(), '01000000024c94e48a870b85f41228d33cf25213dfcc8dd796e7211ed6b1f9a014809dbbb5060000006a473044022041450c258ce7cac7da97316bf2ea1ce66d88967c4df94f3e91f4c2a30f5d08cb02203674d516e6bb2b0afd084c3551614bd9cec3c2945231245e891b145f2d6951f0012103e05ce435e462ec503143305feb6c00e06a3ad52fbf939e85c65f3a765bb7baacffffffff3077d9de049574c3af9bc9c09a7c9db80f2d94caaf63988c9166249b955e867d000000006b483045022100aeb5f1332c79c446d3f906e4499b2e678500580a3f90329edf1ba502eec9402e022072c8b863f8c8d6c26f4c691ac9a6610aa4200edc697306648ee844cfbc089d7a012103df7940ee7cddd2f97763f67e1fb13488da3fbdd7f9c68ec5ef0864074745a289ffffffff0220bf0200000000001976a9147dd65592d0ab2fe0d0257d571abf032cd9db93dc88ac10980200000000001976a914c42e7ef92fdb603af844d064faad95db9bcdfd3d88ac00000000')
   })
 
   it('can create (and broadcast via 3PBP) a typical Transaction', function (done) {
     this.timeout(30000)
 
-    var alice1 = swiftcash.ECPair.makeRandom({ network: testnet })
-    var alice2 = swiftcash.ECPair.makeRandom({ network: testnet })
-    var aliceChange = swiftcash.ECPair.makeRandom({ rng: rng, network: testnet })
+    var alice1 = audaxjs.ECPair.makeRandom({ network: testnet })
+    var alice2 = audaxjs.ECPair.makeRandom({ network: testnet })
+    var aliceChange = audaxjs.ECPair.makeRandom({ rng: rng, network: testnet })
 
     // "simulate" on testnet that Alice has 2 unspent outputs
     testnetUtils.faucetMany([
@@ -63,7 +63,7 @@ describe('swiftcashjs-lib (transactions)', function () {
     ], function (err, unspents) {
       if (err) return done(err)
 
-      var tx = new swiftcash.TransactionBuilder(testnet)
+      var tx = new audaxjs.TransactionBuilder(testnet)
       tx.addInput(unspents[0].txId, unspents[0].vout) // alice1 unspent
       tx.addInput(unspents[1].txId, unspents[1].vout) // alice2 unspent
       tx.addOutput('mwCwTceJvYV27KXBc3NJZys6CjsgsoeHmf', 8e4) // the actual "spend"
@@ -74,36 +74,36 @@ describe('swiftcashjs-lib (transactions)', function () {
       tx.sign(0, alice1)
       tx.sign(1, alice2)
 
-      // build and broadcast to the swiftcash Testnet network
+      // build and broadcast to the audaxjs Testnet network
       dhttp({
         method: 'POST',
         url: 'https://api.ei8ht.com.au:9443/3/pushtx',
 //          url: 'http://tbtc.blockr.io/api/v1/tx/push',
         body: tx.build().toHex()
       }, done)
-      // to build and broadcast to the actual swiftcash network, see https://github.com/bitcoinjs/swiftcashjs-lib/issues/839
+      // to build and broadcast to the actual audaxjs network, see https://github.com/bitcoinjs/audaxjs-lib/issues/839
     })
   })
 
   it('can create (and broadcast via 3PBP) a Transaction with an OP_RETURN output', function (done) {
     this.timeout(30000)
 
-    var keyPair = swiftcash.ECPair.makeRandom({ network: testnet })
+    var keyPair = audaxjs.ECPair.makeRandom({ network: testnet })
     var address = keyPair.getAddress()
 
     testnetUtils.faucet(address, 5e4, function (err, unspent) {
       if (err) return done(err)
 
-      var tx = new swiftcash.TransactionBuilder(testnet)
-      var data = Buffer.from('swiftcashjs-lib', 'utf8')
-      var dataScript = swiftcash.script.nullData.output.encode(data)
+      var tx = new audaxjs.TransactionBuilder(testnet)
+      var data = Buffer.from('audaxjs-lib', 'utf8')
+      var dataScript = audaxjs.script.nullData.output.encode(data)
 
       tx.addInput(unspent.txId, unspent.vout)
       tx.addOutput(dataScript, 1000)
       tx.addOutput(testnetUtils.RETURN_ADDRESS, 4e4)
       tx.sign(0, keyPair)
 
-      // build and broadcast to the swiftcash Testnet network
+      // build and broadcast to the audaxjs Testnet network
       dhttp({
         method: 'POST',
         url: 'https://api.ei8ht.com.au:9443/3/pushtx',
@@ -120,17 +120,17 @@ describe('swiftcashjs-lib (transactions)', function () {
       '91avARGdfge8E4tZfYLoxeJ5sGBdNJQH4kvjJoQFacbgww7vXtT',
       '91avARGdfge8E4tZfYLoxeJ5sGBdNJQH4kvjJoQFacbgx3cTMqe',
       '91avARGdfge8E4tZfYLoxeJ5sGBdNJQH4kvjJoQFacbgx9rcrL7'
-    ].map(function (wif) { return swiftcash.ECPair.fromWIF(wif, testnet) })
+    ].map(function (wif) { return audaxjs.ECPair.fromWIF(wif, testnet) })
     var pubKeys = keyPairs.map(function (x) { return x.getPublicKeyBuffer() })
 
-    var redeemScript = swiftcash.script.multisig.output.encode(2, pubKeys)
-    var scriptPubKey = swiftcash.script.scriptHash.output.encode(swiftcash.crypto.hash160(redeemScript))
-    var address = swiftcash.address.fromOutputScript(scriptPubKey, testnet)
+    var redeemScript = audaxjs.script.multisig.output.encode(2, pubKeys)
+    var scriptPubKey = audaxjs.script.scriptHash.output.encode(audaxjs.crypto.hash160(redeemScript))
+    var address = audaxjs.address.fromOutputScript(scriptPubKey, testnet)
 
     testnetUtils.faucet(address, 2e4, function (err, unspent) {
       if (err) return done(err)
 
-      var txb = new swiftcash.TransactionBuilder(testnet)
+      var txb = new audaxjs.TransactionBuilder(testnet)
       txb.addInput(unspent.txId, unspent.vout)
       txb.addOutput(testnetUtils.RETURN_ADDRESS, 1e4)
 
@@ -139,7 +139,7 @@ describe('swiftcashjs-lib (transactions)', function () {
 
       var tx = txb.build()
 
-      // build and broadcast to the swiftcash Testnet network
+      // build and broadcast to the audaxjs Testnet network
       testnetUtils.transactions.propagate(tx.toHex(), function (err) {
         if (err) return done(err)
 
@@ -151,27 +151,27 @@ describe('swiftcashjs-lib (transactions)', function () {
   it('can create (and broadcast via 3PBP) a Transaction with a SegWit P2SH(P2WPKH) input', function (done) {
     this.timeout(30000)
 
-    var keyPair = swiftcash.ECPair.fromWIF('cMahea7zqjxrtgAbB7LSGbcQUr1uX1ojuat9jZodMN87JcbXMTcA', testnet)
+    var keyPair = audaxjs.ECPair.fromWIF('cMahea7zqjxrtgAbB7LSGbcQUr1uX1ojuat9jZodMN87JcbXMTcA', testnet)
     var pubKey = keyPair.getPublicKeyBuffer()
-    var pubKeyHash = swiftcash.crypto.hash160(pubKey)
+    var pubKeyHash = audaxjs.crypto.hash160(pubKey)
 
-    var redeemScript = swiftcash.script.witnessPubKeyHash.output.encode(pubKeyHash)
-    var redeemScriptHash = swiftcash.crypto.hash160(redeemScript)
+    var redeemScript = audaxjs.script.witnessPubKeyHash.output.encode(pubKeyHash)
+    var redeemScriptHash = audaxjs.crypto.hash160(redeemScript)
 
-    var scriptPubKey = swiftcash.script.scriptHash.output.encode(redeemScriptHash)
-    var address = swiftcash.address.fromOutputScript(scriptPubKey, testnet)
+    var scriptPubKey = audaxjs.script.scriptHash.output.encode(redeemScriptHash)
+    var address = audaxjs.address.fromOutputScript(scriptPubKey, testnet)
 
     testnetUtils.faucet(address, 5e4, function (err, unspent) {
       if (err) return done(err)
 
-      var txb = new swiftcash.TransactionBuilder(testnet)
+      var txb = new audaxjs.TransactionBuilder(testnet)
       txb.addInput(unspent.txId, unspent.vout)
       txb.addOutput(testnetUtils.RETURN_ADDRESS, 4e4)
       txb.sign(0, keyPair, redeemScript, null, unspent.value)
 
       var tx = txb.build()
 
-      // build and broadcast to the swiftcash Testnet network
+      // build and broadcast to the audaxjs Testnet network
       testnetUtils.transactions.propagate(tx.toHex(), function (err) {
         if (err) return done(err)
 
@@ -188,18 +188,18 @@ describe('swiftcashjs-lib (transactions)', function () {
       'cMahea7zqjxrtgAbB7LSGbcQUr1uX1ojuat9jZodMN87K7XCyj5v',
       'cMahea7zqjxrtgAbB7LSGbcQUr1uX1ojuat9jZodMN87KcLPVfXz',
       'cMahea7zqjxrtgAbB7LSGbcQUr1uX1ojuat9jZodMN87L7FgDCKE'
-    ].map(function (wif) { return swiftcash.ECPair.fromWIF(wif, testnet) })
+    ].map(function (wif) { return audaxjs.ECPair.fromWIF(wif, testnet) })
     var pubKeys = keyPairs.map(function (x) { return x.getPublicKeyBuffer() })
 
-    var witnessScript = swiftcash.script.multisig.output.encode(3, pubKeys)
-    var redeemScript = swiftcash.script.witnessScriptHash.output.encode(swiftcash.crypto.sha256(witnessScript))
-    var scriptPubKey = swiftcash.script.scriptHash.output.encode(swiftcash.crypto.hash160(redeemScript))
-    var address = swiftcash.address.fromOutputScript(scriptPubKey, testnet)
+    var witnessScript = audaxjs.script.multisig.output.encode(3, pubKeys)
+    var redeemScript = audaxjs.script.witnessScriptHash.output.encode(audaxjs.crypto.sha256(witnessScript))
+    var scriptPubKey = audaxjs.script.scriptHash.output.encode(audaxjs.crypto.hash160(redeemScript))
+    var address = audaxjs.address.fromOutputScript(scriptPubKey, testnet)
 
     testnetUtils.faucet(address, 6e4, function (err, unspent) {
       if (err) return done(err)
 
-      var txb = new swiftcash.TransactionBuilder(testnet)
+      var txb = new audaxjs.TransactionBuilder(testnet)
       txb.addInput(unspent.txId, unspent.vout)
       txb.addOutput(testnetUtils.RETURN_ADDRESS, 4e4)
       txb.sign(0, keyPairs[0], redeemScript, null, unspent.value, witnessScript)
@@ -208,7 +208,7 @@ describe('swiftcashjs-lib (transactions)', function () {
 
       var tx = txb.build()
 
-      // build and broadcast to the swiftcash Testnet network
+      // build and broadcast to the audaxjs Testnet network
       testnetUtils.transactions.propagate(tx.toHex(), function (err) {
         if (err) return done(err)
 

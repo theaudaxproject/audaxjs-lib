@@ -1,13 +1,13 @@
 module.exports = {
   audaxjs: {
-    messagePrefix: 'Audax Signed Message:\n',
+    messagePrefix: '\x19Audax Signed Message:\n',
     bech32: 'bo',
     bip32: {
       public: 0x022D2533,
       private: 0x0221312B
     },
     pubKeyHash: 0x17,
-    scriptHash: 0x08,
+    scriptHash: 0x8,
     wif: 0x8E
   },
   testnet: {
